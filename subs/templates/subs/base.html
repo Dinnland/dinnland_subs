@@ -1,0 +1,29 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link href="{% static 'subs/css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    {# Меню #}
+    {% include 'subs/includes/inc_home_menu.html' %}
+
+<div class="container">
+<div class="top-cover center-block text-center">
+    <div class="row text-center">
+
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+        {# Футер #}
+        {% include 'subs/includes/inc_futer.html' %}
+
+</div>
+
+<script src="{% static 'subs/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

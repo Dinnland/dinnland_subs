@@ -1,0 +1,57 @@
+{% load mailing_tag %}
+{% block content %}
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+        <h5 class="my-0 mr-md-auto font-weight-normal">Dinnstore&nbsp</h5>
+        <a>меню</a>
+
+        <nav class="ms-5">
+            <a class="p-2 btn btn-outline-primary  btn-sm" href="/">Главная</a>
+{#            <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'subs:contacts' %}>Контакты</a>#}
+{#            <a class="p-2 btn btn-outline-dark btn-sm" href={% url 'blog:blog_list' %}>БЛОГ</a>#}
+
+            {% if user.is_authenticated %}
+                {% if user|is_moderator %}
+                    {#                    {%if not user.is_superuser %}#}
+                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'subs:moderator' %}>
+                        Кабинет модератора</a>
+                    {#                        {% endif %}#}
+
+                {% else %}
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">Рассылки
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href={% url 'subs:mailinglist' %}>Список рассылок</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <a class="dropdown-item" href="{% url "subs:mailing_create" %}">Добавить рассылку</a>
+                        <a class="dropdown-item" href="{% url "subs:mail_create" %}">Добавить сообщение</a>
+                        <a class="dropdown-item" href="{% url "subs:client_create" %}">Добавить клиента</a>
+                    </ul>
+                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'subs:cabinet' %}>Личный кабинет</a>
+                {% endif %}
+
+                <a class="p-2 btn btn-outline-info btn-sm" href={% url 'users:profile' %}>Профиль</a>
+                <a class="p-2 btn btn-danger btn-sm" href={% url 'users:logout' %}>Выйти</a>
+                <a class="p-sm-1 btn btn-outline-secondary btn-sm"
+                   href="http://127.0.0.1:8000/admin/login/?next=/admin/">admin</a>
+            {% else %}
+
+
+
+
+
+{#            <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'users:login' %}>Войти</a>#}
+{#                <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'users:register' %}>Регистрация</a>#}
+
+            {% endif %}
+        </nav>
+        {% if user.is_superuser %}
+            <a>&nbsp Hi, GOD: {{ user.email }}</a>
+        {% else %}
+            <a>&nbsp Hi, {{ user.groups.all.first }}: {{ user.email }}</a>
+        {% endif %}
+
+    </div>
+{% endblock %}
