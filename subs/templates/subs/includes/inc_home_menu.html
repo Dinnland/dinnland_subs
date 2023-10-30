@@ -21,15 +21,15 @@
                             data-bs-toggle="dropdown" aria-expanded="false">Рассылки
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href={% url 'subs:mailinglist' %}>Список рассылок</a></li>
+{#                        <li><a class="dropdown-item" href={% url 'subs:mailinglist' %}>Список рассылок</a></li>#}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <a class="dropdown-item" href="{% url "subs:mailing_create" %}">Добавить рассылку</a>
-                        <a class="dropdown-item" href="{% url "subs:mail_create" %}">Добавить сообщение</a>
-                        <a class="dropdown-item" href="{% url "subs:client_create" %}">Добавить клиента</a>
+{#                        <a class="dropdown-item" href="{% url "subs:mailing_create" %}">Добавить рассылку</a>#}
+{#                        <a class="dropdown-item" href="{% url "subs:mail_create" %}">Добавить сообщение</a>#}
+{#                        <a class="dropdown-item" href="{% url "subs:client_create" %}">Добавить клиента</a>#}
                     </ul>
-                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'subs:cabinet' %}>Личный кабинет</a>
+{#                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'subs:cabinet' %}>Личный кабинет</a>#}
                 {% endif %}
 
                 <a class="p-2 btn btn-outline-info btn-sm" href={% url 'users:profile' %}>Профиль</a>

@@ -1,0 +1,11 @@
+{% extends 'mail_app/base.html' %}
+{% load mailing_tag %}
+{% block content %}
+
+{% autoescape off %}
+Здравствуйте, {{ user.get_username }},
+    Для подверждения регистрации, перейдите по ссылке:
+ {{ domain }}{% url 'verifyemail' uidb64=uid token=token %}
+
+{% endautoescape %}
+{% endblock  %}

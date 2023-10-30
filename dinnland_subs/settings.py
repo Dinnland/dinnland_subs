@@ -18,6 +18,7 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
@@ -34,17 +35,19 @@ if os.getenv("ALLOWED_HOSTS") is not None:
 else:
     ALLOWED_HOSTS = ['*']
 
-SITE_ID = 1
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django.contrib.sites.models.Site',
 
     # django rest_framework (DRF)
 
@@ -58,6 +61,8 @@ INSTALLED_APPS = [
     'users',  # Пользователи
     'subs',  # Сервис - платформа для публикации записей по подписке/без
 ]
+
+SITE_ID = 1
 
 # Настройки срока действия токенов
 # SIMPLE_JWT = {
@@ -160,7 +165,7 @@ ENV_TYPE = os.getenv('ENV_TYPE')
 
 if ENV_TYPE == 'local':
     STATICFILES_DIRS = [
-        BASE_DIR / 'static',
+        BASE_DIR / 'static', 'subs/static'
     ]
 else:
     STATIC_ROOT = BASE_DIR / 'static'

@@ -1,0 +1,76 @@
+{% extends 'subs/base.html' %}
+{% load mailing_tag %}
+{% load static %}
+{% block content %}
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">DinnMail</h1>
+        <p class="lead">{{ title }} сервис рассылок
+        </p>
+    </div>
+
+
+
+
+
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <p>Количество всех рассылок: {{ count_mail_all }}</p>
+                            <p>Количество активных рассылок: {{ count_mail_active }}</p>
+                            <p>Количество клиентов: {{ count_clients }}</p>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="py-5">
+            <div class="container">
+                <div class="row">
+                    <p>Блог:</p>
+                    <div class="row">
+                        {% for blog in blog_last_3_date %}
+                            <div class="col-4 mt-4">
+                                {#    <a href="{% url "blog:blog_detail" el.pk %}" style="text-decoration: none; color: black">#}
+                                <div class="card mb-4 box-shadow">
+                                    <div class="card-header d-flex align-items-center justify-content-center"
+                                         style="height: 100px">
+                                        <h4 class="my-0 font-weight-normal">{{ blog.header }}</h4>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <ul class="list-unstyled mt-3 mb-6 text-start m-3">
+                                            <ul>
+                                                <img class="card-img-top"
+                                                     src="{{ blog.image|mediapath }}"
+                                                     alt="Card image cap">
+                                            </ul>
+                                        </ul>
+                                        <p>{% if blog.content|length <= 50 %}
+                                            <li>{{ blog.content }}</li>
+                                        {% else %}
+                                            <li>{{ blog.content|slice:":50" }}...</li>
+                                        {% endif %}
+                                        </p>
+                                        {# </ul>#}
+                                    </div>
+                                </div>
+                                {#                                    </a>#}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    <div class="card-header d-flex align-items-center justify-content-center" style="height: 100px">#}
+    {#        <h4 class="my-0 font-weight-normal">{{ blog.header }}</h4>#}
+    {#    </div>#}
+
+
+
+{% endblock %}

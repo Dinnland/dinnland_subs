@@ -1,0 +1,42 @@
+{% extends 'mail_app/base.html' %}
+{% load mailing_tag %}
+{% block content %}
+{#    <div class="centered-top">#}
+    <div class="top-cover center-block">
+{#    <div class="col-12">#}
+        <form class="row" method="post" enctype="multipart/form-data">
+            <div class="col-7">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Профиль
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <a>Роль пользователя: </a>
+                        {% if user.is_superuser %}
+                            <h4>Бог</h4>
+                        {% elif user.groups.all.first == None %}
+                            <a>Ваша роль в системе не определена</a>
+                        {% else %}
+                            <h4>{{ user.groups.all.first }}</h4>
+                        {% endif %}
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success">Сохранить</button>
+                    </div>
+                    <a class="card-footer">
+                        <a href="{% url 'users:generate_new_password' %}" class="btn btn-warning">Сгенерировать пароль
+                            <a href="{% url 'users:delete_user' object.pk %}" class="btn btn-danger">Удалить аккаунт
+                                пользователя
+                            </a>
+                        </a>
+                    </a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+{#    </div>#}
+
+{% endblock %}
