@@ -1,11 +1,12 @@
 {% load publication_tag %}
 {% block content %}
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Dinnstore&nbsp</h5>
-        <a>меню</a>
+        <h5 class="my-0 mr-md-auto font-weight-normal">Dinnland_subs&nbsp</h5>
+{#        <a>меню</a>#}
 
         <nav class="ms-5">
-            <a class="p-2 btn btn-outline-primary  btn-sm" href="/">Главная</a>
+{#        <nav class="navbar navbar-expand-lg navbar-light bg-light">#}
+            <a class="p-2 btn btn-outline-dark  btn-sm" href="/">Главная</a>
 {#            <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'publications:contacts' %}>Контакты</a>#}
 {#            <a class="p-2 btn btn-outline-dark btn-sm" href={% url 'blog:blog_list' %}>БЛОГ</a>#}
 
@@ -17,7 +18,7 @@
                     {#                        {% endif %}#}
 
                 {% else %}
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    <button class="p-2 btn btn-outline-dark btn-sm" type="button" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">Рассылки
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -32,7 +33,7 @@
 {#                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'publications:cabinet' %}>Личный кабинет</a>#}
                 {% endif %}
 
-                <a class="p-2 btn btn-outline-info btn-sm" href={% url 'users:profile' %}>Профиль</a>
+                <a class="p-2 btn btn-outline-dark btn-sm" href={% url 'users:profile' %}>Профиль</a>
                 <a class="p-2 btn btn-danger btn-sm" href={% url 'users:logout' %}>Выйти</a>
                 <a class="p-sm-1 btn btn-outline-secondary btn-sm"
                    href="http://127.0.0.1:8000/admin/login/?next=/admin/">admin</a>

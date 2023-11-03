@@ -10,15 +10,15 @@
 
                     {% if user.is_authenticated %}
                         <div class="d-flex justify-content-center">
-                                <a class="btn btn-primary" href="{% url 'publications:createblog' %}">Добавить</a>
+                                <a class="btn btn-primary" href="{% url 'publications:createpublication' %}">Добавить</a>
 {#                            <a class="text-muted" href="#">Добавить</a>#}
                         </div>
                     {% endif %}
                     <div class="row">
 
-                            {% for publications in publications_all %}
+                            {% for publication in publication_all %}
                             <div class="col-4 mt-4">
-{#                                    <a href="{% url "publications:publications_detail" el.pk %}" style="text-decoration: none; color: black">#}
+                                    <a href="{% url "publications:viewpublication" publication.pk %}" style="text-decoration: none; color: black">
                                 <div class="card mb-4 box-shadow">
                                     <div class="card-header d-flex align-items-center justify-content-center"
                                          style="height: 100px">

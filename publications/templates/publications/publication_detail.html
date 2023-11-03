@@ -2,7 +2,7 @@
 {% load publication_tag %}
 {% block content %}
     <div class="pricing-header px-3 py-3 pt-md-4 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">{{ title }}_блог</h1>
+        <h1 class="display-4">{{ title }}</h1>
 
 
     </div>
@@ -47,8 +47,8 @@
                 <td>{{ object.quantity_of_views }}</td>
             </tr>
         </table>
-        <a class="btn btn-outline-primary mt-1 mb-2 " href="{% url 'publications:editblog' object.pk %}">Редактировать блог</a>
-        <a class="btn btn-outline-primary mt-1 mb-2 " href="{% url 'publications:deleteblog' object.pk %}">Удалить блог</a>
+        <a class="btn btn-outline-primary mt-1 mb-2 " href="{% url 'publications:editpublication' object.pk %}">Редактировать блог</a>
+        <a class="btn btn-outline-primary mt-1 mb-2 " href="{% url 'publications:deletepublication' object.pk %}">Удалить блог</a>
 
 
     </div>

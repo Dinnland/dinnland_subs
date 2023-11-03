@@ -50,9 +50,10 @@ class HomeListView(LoginRequiredMixin,  ListView):
 #
 
 class PublicationListView(ListView):
+    """Список публикаций"""
     model = Publication
-    template_name = 'publications/Publication_list.html'
-    context_object_name = 'post_list'
+    template_name = 'publications/publication_list.html'
+    context_object_name = 'publication_list'
 
     # def get_queryset(self):
     #     queryset = super().get_queryset()
@@ -67,29 +68,30 @@ class PublicationListView(ListView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
 
-        context_data['Publication_all'] = Publication.objects.all()
-        context_data['Publication_last_3_date'] = Publication.objects.filter(sign_of_publication=True).order_by('-date_of_create')[:3]
+        context_data['publication_all'] = Publication.objects.all()
+        context_data['publication_last_3_date'] = Publication.objects.filter(sign_of_publication=True).order_by('-date_of_create')[:3]
         if self.request.user.groups.first() == 'moderator':
             context_data['qwerty'] = 'moderator'
         elif self.request.user.groups.first() == 'Moderator':
             context_data['qwerty'] = 'Moderator'
         else:
-            context_data['qwerty'] = 'ne    moderator'
+            context_data['qwerty'] = 'ne moderator'
         context_data['user_gr_name'] = self.request.user.groups.name
         context_data['user_gr_first'] = self.request.user.groups.first()
         return context_data
 
 
 class PublicationCreateView(CreateView):
-    """страница для создания блога"""
+    """Страница для создания публикации"""
     model = Publication
     form_class = PublicationForm
 
-    success_url = reverse_lazy('Publication:Publication_list')
+    success_url = reverse_lazy('publications:publication_list')
 
     def form_valid(self, form):
-        """динамическое формирование Slug"""
+        """Динамическое формирование Slug, присвоение хозяина публикации"""
         if form.is_valid():
+            form.instance.owner = self.request.user
             new_publication = form.save()
             new_publication.slug = slugify(new_publication.header)
             new_publication.save()
@@ -112,7 +114,7 @@ class PublicationCreateView(CreateView):
 
 
 class PublicationDetailView(DetailView):
-    """Стр с блогом"""
+    """Страница с публикацией"""
     model = Publication
 
     def get_object(self, queryset=None):
@@ -123,14 +125,14 @@ class PublicationDetailView(DetailView):
         return self.object
 
     def get_success_url(self):
-        return reverse('mail_app:viewPublication', args=[self.kwargs.get('pk')])
+        return reverse('publications:viewpublication', args=[self.kwargs.get('pk')])
 
 
 class PublicationUpdateView(UpdateView):
     """Страница для Изменения блога"""
     model = Publication
     # fields = ('__all__')
-    fields = ('header', 'content', 'image')
+    fields = ('header', 'content', 'image', 'video')
     # success_url = reverse_lazy('catalog:listPublication')
 
     def form_valid(self, form):
@@ -142,7 +144,7 @@ class PublicationUpdateView(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('mail_app:viewPublication')
+        return reverse('publications:viewpublication')
 
 
 class PublicationDeleteView(DeleteView):
@@ -150,7 +152,7 @@ class PublicationDeleteView(DeleteView):
     model = Publication
     # fields = ('__all__')
     # fields = ('header', 'content', 'image')
-    success_url = reverse_lazy('mail_app:publication_list')
+    success_url = reverse_lazy('publications:publication_list')
 
 
 

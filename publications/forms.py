@@ -9,9 +9,9 @@ from publications.models import Publication
 
 
 class PublicationForm(forms.ModelForm):
-    def __init__(self, *args,  **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['date_of_create'].widget = DateInput(attrs={'type': 'datetime-local'})
+    # def __init__(self, *args,  **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['date_of_create'].widget = DateInput(attrs={'type': 'datetime-local'})
 
     class Meta:
         model = Publication

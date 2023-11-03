@@ -17,12 +17,12 @@ urlpatterns = [
     path('', HomeListView.as_view(extra_context={'title': 'Dinnland_subs'}), name='home'),
     #
     # path('contacts/', index_contacts, name='contacts'),
-    path('not_authenticated/', NotAuthenticated.as_view(extra_context={'title': 'Dinnland'}), name='not_authenticated'),
+    path('not_authenticated/', NotAuthenticated.as_view(extra_context={'title': 'Dinnland_subs'}), name='not_authenticated'),
     # path('cabinet/', CabinetView.as_view(), name="cabinet"),Publication
 
-    path('', views.PublicationListView.as_view(), name='publication_list'),
+    path('pubs/', views.PublicationListView.as_view(), name='publication_list'),
     path('create-publication/', PublicationCreateView.as_view(), name='createpublication'),
-    path('view-publication/<int:pk>/', PublicationDetailView.as_view(extra_context={'title': 'Dinnstore'}), name='viewpublication'),
+    path('view-publication/<int:pk>/', PublicationDetailView.as_view(extra_context={'title': 'Dinnland_subs'}), name='viewpublication'),
     path('edit-publication/<int:pk>/', PublicationUpdateView.as_view(), name='editpublication'),
     path('delete-publication/<int:pk>/', PublicationDeleteView.as_view(), name='deletepublication'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
