@@ -1,0 +1,57 @@
+{% extends 'publications/base.html' %}
+{% load publication_tag %}
+{% block content %}
+    <div class="pricing-header px-3 py-3 pt-md-4 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">{{ title }}_блог</h1>
+
+
+    </div>
+
+    <div class="col-12">
+        <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                Это не видеоБЛОГ
+            </h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table">
+
+            <tr>
+                <td>Заголовок</td>
+                <td>{{ object.header }}</td>
+            </tr>
+            <tr>
+                <td>Изображение</td>
+                <td>{{ object.image }}</td>
+            </tr>
+            <tr>
+                <td>Содержание</td>
+                <td>{{ object.content }}</td>
+            </tr>
+            <tr>
+                <td>Ссылка</td>
+                <td>{{ object.slug }}</td>
+            </tr>
+            <tr>
+                <td>дата создания</td>
+                <td>{{ object.date_of_create }}</td>
+            </tr>
+            <tr>
+                <td>признак публикации</td>
+                <td>{{ object.sign_of_publication }}</td>
+            </tr>
+            <tr>
+                <td>количество просмотров</td>
+                <td>{{ object.quantity_of_views }}</td>
+            </tr>
+        </table>
+        <a class="btn btn-outline-primary mt-1 mb-2 " href="{% url 'publications:editblog' object.pk %}">Редактировать блог</a>
+        <a class="btn btn-outline-primary mt-1 mb-2 " href="{% url 'publications:deleteblog' object.pk %}">Удалить блог</a>
+
+
+    </div>
+     </div>
+
+{% endblock %}

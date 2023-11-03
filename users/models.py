@@ -12,8 +12,9 @@ NULLABLE = {'null': True, 'blank': True}
 class User(AbstractUser):
     """Пользователь сервиса"""
     username = None
-    email = models.EmailField(unique=True, verbose_name='Email', **NULLABLE)
+    email = models.EmailField(unique=True, verbose_name='Email', blank=True)
     phone = PhoneNumberField(unique=True, help_text='Номер телефона')
+    # role =
     # name = models.CharField(max_length=100, verbose_name='Имя', **NULLABLE)
     # surname = models.CharField(max_length=100, verbose_name='Фамилия', **NULLABLE)
     patronymic = models.CharField(max_length=100, verbose_name='Отчество', **NULLABLE)

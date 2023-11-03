@@ -1,4 +1,4 @@
-{% load mailing_tag %}
+{% load publication_tag %}
 {% block content %}
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
         <h5 class="my-0 mr-md-auto font-weight-normal">Dinnstore&nbsp</h5>
@@ -6,13 +6,13 @@
 
         <nav class="ms-5">
             <a class="p-2 btn btn-outline-primary  btn-sm" href="/">Главная</a>
-{#            <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'subs:contacts' %}>Контакты</a>#}
+{#            <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'publications:contacts' %}>Контакты</a>#}
 {#            <a class="p-2 btn btn-outline-dark btn-sm" href={% url 'blog:blog_list' %}>БЛОГ</a>#}
 
             {% if user.is_authenticated %}
                 {% if user|is_moderator %}
                     {#                    {%if not user.is_superuser %}#}
-                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'subs:moderator' %}>
+                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'publications:moderator' %}>
                         Кабинет модератора</a>
                     {#                        {% endif %}#}
 
@@ -21,15 +21,15 @@
                             data-bs-toggle="dropdown" aria-expanded="false">Рассылки
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-{#                        <li><a class="dropdown-item" href={% url 'subs:mailinglist' %}>Список рассылок</a></li>#}
+{#                        <li><a class="dropdown-item" href={% url 'publications:mailinglist' %}>Список рассылок</a></li>#}
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-{#                        <a class="dropdown-item" href="{% url "subs:mailing_create" %}">Добавить рассылку</a>#}
-{#                        <a class="dropdown-item" href="{% url "subs:mail_create" %}">Добавить сообщение</a>#}
-{#                        <a class="dropdown-item" href="{% url "subs:client_create" %}">Добавить клиента</a>#}
+{#                        <a class="dropdown-item" href="{% url "publications:mailing_create" %}">Добавить рассылку</a>#}
+{#                        <a class="dropdown-item" href="{% url "publications:mail_create" %}">Добавить сообщение</a>#}
+{#                        <a class="dropdown-item" href="{% url "publications:client_create" %}">Добавить клиента</a>#}
                     </ul>
-{#                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'subs:cabinet' %}>Личный кабинет</a>#}
+{#                    <a class="p-2 btn btn-outline-primary btn-sm" href={% url 'publications:cabinet' %}>Личный кабинет</a>#}
                 {% endif %}
 
                 <a class="p-2 btn btn-outline-info btn-sm" href={% url 'users:profile' %}>Профиль</a>

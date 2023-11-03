@@ -53,13 +53,13 @@ INSTALLED_APPS = [
 
 
     # other
-    'phone_field',
+    # 'phone_field',
 
     "phonenumber_field",
 
     # my apps
     'users',  # Пользователи
-    'subs',  # Сервис - платформа для публикации записей по подписке/без
+    'publications',  # Сервис - платформа для публикации записей по подписке/без
 ]
 
 SITE_ID = 1
@@ -165,7 +165,7 @@ ENV_TYPE = os.getenv('ENV_TYPE')
 
 if ENV_TYPE == 'local':
     STATICFILES_DIRS = [
-        BASE_DIR / 'static', 'subs/static'
+        BASE_DIR / 'static', 'publications/static'
     ]
 else:
     STATIC_ROOT = BASE_DIR / 'static'

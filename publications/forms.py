@@ -2,8 +2,28 @@ from django import forms
 from datetime import datetime
 from django.forms import DateTimeInput, DateInput
 from django.views.generic.edit import FormMixin
+from publications.models import Publication
+# from publications.models import (MailingSettings, MessageToMailing, Client)
 
-# from subs.models import (MailingSettings, MessageToMailing, Client)
+# //////////////////////////////////////////////////////////////////
+
+
+class PublicationForm(forms.ModelForm):
+    def __init__(self, *args,  **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['date_of_create'].widget = DateInput(attrs={'type': 'datetime-local'})
+
+    class Meta:
+        model = Publication
+        fields = ('header', 'content', 'image', 'video')
+        # fields = '__all__'
+
+        # widgets = {
+        #     'date_of_create': forms.DateInput(
+        #         attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)', 'class': 'form-control'}
+        #     )
+        # }
+# //////////////////////////////////////////////////////////////////
 
 
 # class ContactForm(forms.Form):

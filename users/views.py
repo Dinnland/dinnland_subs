@@ -82,6 +82,7 @@ class RegisterView(CreateView):
     def form_valid(self, form):
         user = form.save(commit=False)
         user.is_active = False
+
         user.save()
 
         # Функционал для отправки письма и генерации токена
@@ -154,7 +155,7 @@ class EmailConfirmationFailedView(TemplateView):
 
 
 def generate_new_password(request):
-    """Генерация пароля и отправка сообщения с ссылкой на почту"""
+    """Генерация пароля и отправка сообщения со ссылкой на почту"""
     # new_password = ''.join([str(random.randint(0, 9)) for _ in range(12)])
     new_password = get_random_string(length=12)
     send_mail(
@@ -171,7 +172,7 @@ def generate_new_password(request):
 
 
 def recovery_password(request):
-    """восстановление пароля"""
+    """Восстановление пароля"""
     # make_password(
     # new_password = ''.join([str(random.randint(0, 9)) for _ in range(12)])
     new_password = get_random_string(length=12)

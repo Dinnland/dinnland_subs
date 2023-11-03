@@ -1,0 +1,56 @@
+{% extends 'publications/base.html' %}
+{% block content %}
+{% load publication_tag %}
+
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+
+                    {% if user.is_authenticated %}
+                        <div class="d-flex justify-content-center">
+                                <a class="btn btn-primary" href="{% url 'publications:createblog' %}">Добавить</a>
+{#                            <a class="text-muted" href="#">Добавить</a>#}
+                        </div>
+                    {% endif %}
+                    <div class="row">
+
+                            {% for publications in publications_all %}
+                            <div class="col-4 mt-4">
+{#                                    <a href="{% url "publications:publications_detail" el.pk %}" style="text-decoration: none; color: black">#}
+                                <div class="card mb-4 box-shadow">
+                                    <div class="card-header d-flex align-items-center justify-content-center"
+                                         style="height: 100px">
+                                        <h4 class="my-0 font-weight-normal">{{ publication.header }}</h4>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <ul class="list-unstyled mt-3 mb-6 text-start m-3">
+                                            <ul>
+                                                <img class="card-img-top"
+                                                     src="{{ publication.image|mediapath }}"
+                                                     alt="Card image cap">
+                                            </ul>
+                                        </ul>
+                                        <p>{% if publication.content|length <= 50 %}
+                                            <li>{{ publication.content }}</li>
+                                        {% else %}
+                                            <li>{{ publication.content|slice:":50" }}...</li>
+                                        {% endif %}
+                                        </p>
+                                    <a>{{ publication.quantity_of_views }}</a>
+                                        {# </ul>#}
+                                    </div>
+                                </div>
+                                {#                                    </a>#}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

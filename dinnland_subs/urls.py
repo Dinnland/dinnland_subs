@@ -22,8 +22,8 @@ from dinnland_subs import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(('subs.urls', 'subs'), namespace='subs')),
-    # path('', include('subs.urls', namespace='subs')),
+    path('', include(('publications.urls', 'publications'), namespace='publications')),
+    # path('', include('publications.urls', namespace='publications')),
 
     path('', include('users.urls', namespace='users')),
 

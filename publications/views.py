@@ -6,26 +6,29 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import View, ListView, DetailView, UpdateView, CreateView, TemplateView, DeleteView
 
-# from apps.blog.models import Blog
-from subs.models import *
-from subs.forms import *
-# from subs.services import get_filter_user_group
+from publications.models import Publication
+from publications.models import *
+from publications.forms import *
+# from publications.services import get_filter_user_group
+
+from pytils.translit import slugify
+from django.urls import reverse_lazy, reverse
 #
 #
 def base(request):
     """ Базовый шаблон с меню, футером и тд """
-    context = {'title': 'Dinnland-subs'}
-    # return render(request, 'subs/base1.html', context)
-    return render(request, 'subs/base.html', context)
+    context = {'title': 'Dinnland-publications'}
+    # return render(request, 'publications/base1.html', context)
+    return render(request, 'publications/base.html', context)
 
 #
 #
 class HomeListView(LoginRequiredMixin,  ListView):
     """Главная стр с TemplateView LoginRequiredMixin,  ListView"""
-    model = MailingSettings
+    model = Publication
 
-    template_name = 'subs/home.html'
-    login_url = 'mail_app:not_authenticated'
+    template_name = 'publications/includes/home.html'
+    login_url = 'publications:not_authenticated'
 #
 #     def get_context_data(self, **kwargs):
 #         context_data = super().get_context_data(**kwargs)
@@ -43,15 +46,127 @@ class HomeListView(LoginRequiredMixin,  ListView):
 #     context = {
 #         'header': 'Контакты'
 #                }
-#     return render(request, 'subs/contacts.html', context)
+#     return render(request, 'publications/contacts.html', context)
 #
+
+class PublicationListView(ListView):
+    model = Publication
+    template_name = 'publications/Publication_list.html'
+    context_object_name = 'post_list'
+
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     # queryset = queryset.filter(is_published=True)
+    #     return queryset
+    def get_queryset(self, queryset=None, *args, **kwargs):
+        """Метод для вывода ТОЛЬКО опубликованных блогов"""
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(sign_of_publication=True)
+
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+
+        context_data['Publication_all'] = Publication.objects.all()
+        context_data['Publication_last_3_date'] = Publication.objects.filter(sign_of_publication=True).order_by('-date_of_create')[:3]
+        if self.request.user.groups.first() == 'moderator':
+            context_data['qwerty'] = 'moderator'
+        elif self.request.user.groups.first() == 'Moderator':
+            context_data['qwerty'] = 'Moderator'
+        else:
+            context_data['qwerty'] = 'ne    moderator'
+        context_data['user_gr_name'] = self.request.user.groups.name
+        context_data['user_gr_first'] = self.request.user.groups.first()
+        return context_data
+
+
+class PublicationCreateView(CreateView):
+    """страница для создания блога"""
+    model = Publication
+    form_class = PublicationForm
+
+    success_url = reverse_lazy('Publication:Publication_list')
+
+    def form_valid(self, form):
+        """динамическое формирование Slug"""
+        if form.is_valid():
+            new_publication = form.save()
+            new_publication.slug = slugify(new_publication.header)
+            new_publication.save()
+        return super().form_valid(form)
+
+
+# classBlogListView(ListView):
+#     """ Главная стр с блогами"""
+#     model = Blog
+#
+#     def get_queryset(self, queryset=None, *args, **kwargs):
+#         """Метод для вывода ТОЛЬКО опубликованных блогов"""
+#         queryset = super().get_queryset(*args, **kwargs)
+#         queryset = queryset.filter(sign_of_publication=True)
+#
+#         # item = get_object_or_404(Blog, pk=some_pk)
+#         # items_table = item.name_table__set.all()
+#         # image_items = item.name_images_table__set.all()
+#         return queryset
+
+
+class PublicationDetailView(DetailView):
+    """Стр с блогом"""
+    model = Publication
+
+    def get_object(self, queryset=None):
+        """Метод для подсчета просмотров"""
+        self.object = super().get_object(queryset)
+        self.object.quantity_of_views += 1
+        self.object.save()
+        return self.object
+
+    def get_success_url(self):
+        return reverse('mail_app:viewPublication', args=[self.kwargs.get('pk')])
+
+
+class PublicationUpdateView(UpdateView):
+    """Страница для Изменения блога"""
+    model = Publication
+    # fields = ('__all__')
+    fields = ('header', 'content', 'image')
+    # success_url = reverse_lazy('catalog:listPublication')
+
+    def form_valid(self, form):
+        """Динамическое формирование Slug"""
+        if form.is_valid():
+            new_publication = form.save()
+            new_publication.slug = slugify(new_publication.header)
+            new_publication.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('mail_app:viewPublication')
+
+
+class PublicationDeleteView(DeleteView):
+    """страница для удаления блога"""
+    model = Publication
+    # fields = ('__all__')
+    # fields = ('header', 'content', 'image')
+    success_url = reverse_lazy('mail_app:publication_list')
+
+
+
+
+class NotAuthenticated(ListView):
+    """not_authenticated"""
+    model = Publication
+    template_name = 'publications/not_authenticated.html'
+
 # # create ----------------------------------------------------------------
 #
 #
 # class MailingSettingsCreateView(CreateView):
 #     model = MailingSettings
 #     form_class = MailingSettingsForm
-#     template_name = 'subs/mailing_form.html'
+#     template_name = 'publications/mailing_form.html'
 #     success_url = reverse_lazy('mail_app:cabinet')
 #
 #     def get_form_kwargs(self):
@@ -313,7 +428,4 @@ class HomeListView(LoginRequiredMixin,  ListView):
 #         return redirect('mail_app:cabinet')
 #
 #
-# class NotAuthenticated(ListView):
-#     """not_authenticated"""
-#     model = MailingSettings
-#     template_name = 'mail_app/not_authenticated.html'
+
