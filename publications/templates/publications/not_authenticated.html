@@ -7,7 +7,9 @@
         Для того, что бы взаимодействовать с продуктами, войдите под своей учетной записью!
     </p>
             <a class="p-2 btn btn-outline-primary" href={% url 'users:login' %}>Войти</a>
-            <a class="p-2 btn btn-outline-primary" href={% url 'users:register' %}>Регистрация</a>
+            <a class="p-2 btn btn-outline-primary" href={% url 'users:register' %}>Регистрация по @email</a>
+            <a class="p-2 btn btn-outline-primary" href={% url 'users:smsregister' %}>Регистрация по телефону</a>
+
 </div>
 {% endblock %}
 

@@ -7,7 +7,6 @@
             {#    <div class="col-12">#}
             <form class="row-cols-auto" method="post" enctype="multipart/form-data">
 
-                hh
                 {#            <div class="col-md-6 text-center">#}
                 <div class="col-sm">
                     <div class="card">
@@ -16,6 +15,7 @@
                                 Профиль
                             </h3>
                         </div>
+
                         <div class="card-body">
                             <a>Роль пользователя: </a>
                             {% if user.is_superuser %}
@@ -40,14 +40,7 @@
                     </div>
 
                 </div>
-{#                <div class="col-sm">#}
-{#                    <div class="card">#}
-{#                        <div class="card-header">#}
-{#                            <h3 class="card-title">#}
-{#                                Профиль#}
-{#                            </h3>#}
-{#                            < /div>#}
-{#                        </div>#}
+
             </form>
         </div>
     </div>

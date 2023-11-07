@@ -6,51 +6,54 @@
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">{{ title }}</h1>
         <p class="lead"> Смотри уникальный контент
+            <a class="btn btn-primary" href="{% url 'publications:publication_list' %}">Публикации</a>
+
+
     </div>
 
 
 
 
 
-    <div class="py-5">
+    <div class="py-5">ннн
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-6 offset-md-3">
-
+uihibnijn
                             <div class="col-md-4"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="py-5">
+        <div class="py-5">1111
             <div class="container">
                 <div class="row">
-                    <p>Блог:</p>
+                    <p>Публикации:</p>
                     <div class="row">
-                        {% for blog in blog_last_3_date %}
-                            <div class="col-4 mt-4">
+                        {% for publication in publication_list %}
+                            <div class="col-4 mt-4">ппп
                                 {#    <a href="{% url "blog:blog_detail" el.pk %}" style="text-decoration: none; color: black">#}
                                 <div class="card mb-4 box-shadow">
                                     <div class="card-header d-flex align-items-center justify-content-center"
                                          style="height: 100px">
-                                        <h4 class="my-0 font-weight-normal">{{ blog.header }}</h4>
+                                        <h4 class="my-0 font-weight-normal">{{ publication.header }}</h4>
                                     </div>
 
                                     <div class="card-body">
                                         <ul class="list-unstyled mt-3 mb-6 text-start m-3">
                                             <ul>
                                                 <img class="card-img-top"
-                                                     src="{{ blog.image|mediapath }}"
+                                                     src="{{ publication.image|mediapath }}"
                                                      alt="Card image cap">
                                             </ul>
                                         </ul>
-                                        <p>{% if blog.content|length <= 50 %}
-                                            <li>{{ blog.content }}</li>
+                                        <p>{% if publication.content|length <= 50 %}
+                                            <li>{{ publication.content }}</li>
                                         {% else %}
-                                            <li>{{ blog.content|slice:":50" }}...</li>
+                                            <li>{{ publication.content|slice:":50" }}...</li>
                                         {% endif %}
                                         </p>
                                         {# </ul>#}

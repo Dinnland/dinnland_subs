@@ -11,13 +11,15 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     ### path('cabinet/', ProfileView.as_view(), name='profile'),
     path('register/', RegisterView.as_view(), name='register'),
+    path('smsregister/', SMSRegisterView.as_view(), name='smsregister'),
+    path('smscode/', SMSCodeView.as_view(template_name='users/registration/sms_code.html'), name='smscode'),
     path('profile/', ProfileView.as_view(), name='profile'),
-    path('profile/genpassword', generate_new_password, name='generate_new_password'),
+    path('profile/genpassword/', generate_new_password, name='generate_new_password'),
     path('password-reset/', UserForgotPasswordView.as_view(), name='password_reset'),
 
     path('delete-user/<int:pk>/', UserDeleteView.as_view(), name='delete_user'),
 
-    ### path('done-generate-new-password/', UserForgotPasswordView.as_view(), name='done_generate_new_password'),
+    ### path('done-generate-new-password/', UserForgotPasswordView.as_view(), name='DoneGenerateNewPassword'),
 
     path('set-new-password/<uidb64>/<token>/', UserPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     ### path('profile/', ProfileView.as_view(), name='profile'),
@@ -27,6 +29,6 @@ urlpatterns = [
     path('email-confirmed/', EmailConfirmedView.as_view(), name='email_confirmed'),
     path('confirm-email-failed/', EmailConfirmationFailedView.as_view(), name='email_confirmation_failed'),
     path('users-list/', UsersListView.as_view(), name='users_list'),
-    path('users-off/<int:pk>', UserStatusUpdateView.as_view(), name='users_off')
+    # path('users-off/<int:pk>', UserStatusUpdateView.as_view(), name='users_off')
 
 ]

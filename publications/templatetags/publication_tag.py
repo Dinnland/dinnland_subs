@@ -7,9 +7,9 @@ register = template.Library()
 @register.filter()
 def mediapath(value):
     if value:
-        return f"/media/publications/{value}"
+        return f"/media/{value}"
     else:
-        return '/media/publications/dinn_logo_white.png'
+        return '/media/dinn_logo_red.png'
 
 @register.filter()
 def is_moderator(user):
@@ -17,3 +17,12 @@ def is_moderator(user):
 
 # def is_superuser(user):
 #     return user.is_superuser
+
+@register.filter()
+def mediapathvideo(value):
+    # return f"/media/{value}"
+    if value:
+        return f"/media/{value}"
+    else:
+        # return '/media/homer.mp4'
+        return None
