@@ -3,22 +3,30 @@
 {% block content %}
     <div class="col-12">
         <form class="row" method="post" enctype="multipart/form-data">
-            {#    <form method="post" class="row">#}
-            {#        <div class="col-10 mx-auto text-center">#}
+
             <div class="col-sm-8 mx-auto">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Регистрация
+                            <a>Введите код доступа, отправленный на ваш номер:</a>
                         </h3>
                     </div>
                     <div class="card-body">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button type="submit" class="btn btn-success">Регистрация</button>
+                        <button type="submit" class="btn btn-success">Ввести</button>
                     </div>
+                    <a class="p-2 btn-outline-primary" href={% url 'users:send-access-code' %}>Отправить еще раз</a>
+
+
+
+
+
+
+
                 </div>
             </div>
         </form>
     </div>
+
 {% endblock %}

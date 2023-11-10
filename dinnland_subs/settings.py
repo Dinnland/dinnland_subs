@@ -231,5 +231,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 
-
+# ID для отправки смс
+SMSAERO_API = os.getenv('SMSAERO_API')
+SMSAERO_EMAIL = os.getenv('SMSAERO_EMAIL')
 

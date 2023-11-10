@@ -6,7 +6,7 @@
             {#    <form method="post" class="row">#}
             {#        <div class="col-10 mx-auto text-center">#}
 
-            <div class="col-8">
+            <div class="col-sm-8 mx-auto">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
@@ -19,10 +19,11 @@
                         <button type="submit" class="btn btn-success">Войти</button>
 
                     </div>
-                    <a class="card-footer">
+{#                    <a class="card-footer">#}
 
-                        <a class="p-2 btn btn-outline-primary" href={% url 'users:password_reset' %}>Сбросить пароль</a>
-                    </a>
+                        <a class="p-2 btn-outline-primary" href={% url 'users:password_reset' %}>Сбросить пароль по email</a>
+                        <a class="p-2 btn-outline-primary" href={% url 'users:make_access_for_password' %}>Сбросить пароль по телефону</a>
+{#                    </a>#}
                 </div>
             </div>
         </form>
