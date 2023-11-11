@@ -30,7 +30,6 @@ def get_session(instance):
         # надеюсь сработает
         customer_email=f"{instance.user.email}",
     )
-
     return session
 
 

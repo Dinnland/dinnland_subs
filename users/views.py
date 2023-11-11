@@ -208,7 +208,7 @@ def generate_new_password(request):
         )
         request.user.set_password(new_password)
         request.user.save()
-        return redirect(reverse('users:DoneGenerateNewPassword'))
+        return redirect(reverse('users:done_generate_new_password'))
     else:
         return redirect('users:email_confirmation_failed')
 
@@ -401,12 +401,12 @@ def generate_access_code(queryset, db_user, message):
     db_user.save()
     Site.objects.clear_cache()
 
-    # Отправка кода на телефон
-    format_phone = str(db_user.phone)[1:]
-    int_phone = int(format_phone)
-    message = f'{message}{db_user.access_code}'
-    send_sms(phone=int_phone, message=message)
-    # pprint(data)
+    # # Отправка кода на телефон
+    # format_phone = str(db_user.phone)[1:]
+    # int_phone = int(format_phone)
+    # message = f'{message}{db_user.access_code}'
+    # send_sms(phone=int_phone, message=message)
+    return db_user
 
 
 def send_sms(phone: int, message: str) -> dict:
@@ -428,7 +428,7 @@ def send_sms(phone: int, message: str) -> dict:
 # Payment -----------------------------------------------------------------------------------------------------------
 
 
-class PaymentCreateView(CreateView):
+class PaymentCreateView(LoginRequiredMixin, CreateView):
     """ Создаем платеж """
     model = Payment
     template_name = 'users/subscription.html'
@@ -470,7 +470,7 @@ class PaymentCreateView(CreateView):
         return self.request.user
 
 
-class PaymentRetrieveView(ListView):
+class PaymentRetrieveView(LoginRequiredMixin, ListView):
     """ Получаем ссылку на оплату Payment"""
     model = Payment
     # context_object_name = 'payment_list'
@@ -519,7 +519,7 @@ class PaymentListView(generics.ListAPIView):
     ordering_fields = ('date_of_payment',)
 
 
-class PaymentSuccessView(ListView):
+class PaymentSuccessView(LoginRequiredMixin, ListView):
     """ Проверка """
     model = Payment
     context_object_name = 'payment_list'

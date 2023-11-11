@@ -24,7 +24,7 @@ class HomeListView(LoginRequiredMixin,  ListView):
     login_url = 'publications:not_authenticated'
 
 
-class PublicationListView(ListView):
+class PublicationListView(LoginRequiredMixin, ListView):
     """Список публикаций"""
     model = Publication
     template_name = 'publications/publication_list.html'
@@ -52,7 +52,7 @@ class PublicationListView(ListView):
         return context_data
 
 
-class AuthorPublicationListView(ListView):
+class AuthorPublicationListView(LoginRequiredMixin, ListView):
     """Список публикаций конкретного автора"""
     model = Publication
     template_name = 'publications/author_publication_list.html'
@@ -74,7 +74,7 @@ class AuthorPublicationListView(ListView):
         return context_data
 
 
-class PublicationCreateView(CreateView):
+class PublicationCreateView(LoginRequiredMixin, CreateView):
     """Страница для создания публикации"""
     model = Publication
     form_class = PublicationForm
@@ -91,7 +91,7 @@ class PublicationCreateView(CreateView):
         return super().form_valid(form)
 
 
-class PublicationDetailView(DetailView):
+class PublicationDetailView(LoginRequiredMixin, DetailView):
     """Страница с публикацией"""
     model = Publication
 
@@ -107,7 +107,7 @@ class PublicationDetailView(DetailView):
         return reverse('publications:viewpublication', args=[self.kwargs.get('pk')])
 
 
-class PublicationUpdateView(UpdateView):
+class PublicationUpdateView(LoginRequiredMixin, UpdateView):
     """Страница для Изменения блога"""
     model = Publication
     form_class = PublicationForm
@@ -125,13 +125,18 @@ class PublicationUpdateView(UpdateView):
         return reverse('publications:viewpublication', args=[self.kwargs.get('pk')])
 
 
-class PublicationDeleteView(DeleteView):
+class PublicationDeleteView(LoginRequiredMixin, DeleteView):
     """Страница для удаления блога"""
     model = Publication
     # fields = ('__all__')
     # fields = ('header', 'content', 'image')
     success_url = reverse_lazy('publications:publication_list')
 
+    # def get_queryset(self, queryset=None, *args, **kwargs):
+    #     """Метод для вывода ТОЛЬКО опубликованных публикаций"""
+    #     queryset = super().get_queryset(*args, **kwargs)
+    #     queryset = queryset.filter(sign_of_publication=True)
+    #     return queryset
 
 class NotAuthenticated(ListView):
     """not_authenticated"""
