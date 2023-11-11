@@ -25,9 +25,10 @@ class Publication(models.Model):
                                  FileExtensionValidator(allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
     sign_of_publication = models.BooleanField(default=True, verbose_name='Признак публикации', **NULLABLE)
     quantity_of_views = models.IntegerField(default=0, verbose_name='Количество просмотров')
+    is_paid = models.BooleanField(default=False, verbose_name='Признак платной публикации')
 
-    def __int__(self):
-        return f'{self.header} '
+    # def __int__(self):
+    #     return f'{self.header}'
 
     def __str__(self):
         return f'{self.header}'

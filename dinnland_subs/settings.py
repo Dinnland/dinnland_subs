@@ -36,7 +36,6 @@ else:
     ALLOWED_HOSTS = ['*']
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -50,8 +49,9 @@ INSTALLED_APPS = [
     # 'django.contrib.sites.models.Site',
 
     # django rest_framework (DRF)
-
-
+    'rest_framework',
+    'django_filters',
+    'rest_framework_simplejwt',
     # other
     # 'phone_field',
 
@@ -86,8 +86,7 @@ ROOT_URLCONF = 'dinnland_subs.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -206,14 +205,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    # ВСЕ ЗАКРЫВАЕТСЯ АУТЕНТИФИКАЦИЕЙ
-    'DEFAULT_PERMISSION_CLASSES': [
-            'rest_framework.permissions.IsAuthenticated',
-        ],
-    # # По отдельности ЗАКРЫВАЕТСЯ АУТЕНТИФИКАЦИЕЙ
+    # # ВСЕ ЗАКРЫВАЕТСЯ АУТЕНТИФИКАЦИЕЙ
     # 'DEFAULT_PERMISSION_CLASSES': [
-    #    'rest_framework.permissions.AllowAny',
-    #       ],
+    #         'rest_framework.permissions.IsAuthenticated',
+    #     ],
+    # По отдельности ЗАКРЫВАЕТСЯ АУТЕНТИФИКАЦИЕЙ
+    'DEFAULT_PERMISSION_CLASSES': [
+       'rest_framework.permissions.AllowAny',
+          ],
 
 }
 
@@ -234,4 +233,3 @@ STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 # ID для отправки смс
 SMSAERO_API = os.getenv('SMSAERO_API')
 SMSAERO_EMAIL = os.getenv('SMSAERO_EMAIL')
-

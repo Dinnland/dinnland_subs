@@ -1,0 +1,45 @@
+{% extends 'publications/base.html' %}
+{% load publication_tag %}
+{% block content %}
+    <div class="col-12">
+        <form class="row" method="post" enctype="multipart/form-data">
+
+            <div class="col-sm-8 mx-auto">
+                <div class="card">
+
+{#                {{ subscr }}#}
+                    {% if req_user.payment_pk %}
+{#                        {% if req_user.payment_pk== %}#}
+                            <a class="p-2 btn btn-outline-dark btn-sm"
+                               href={% url 'users:stripe-success' req_user.payment_pk %}>Проверить платеж</a>
+{#                        {% endif %}#}
+                    {% else %}
+                        <a>{{ qwerty }}</a>
+{#                        <a>{{ qwertyop }}</a>#}
+{#                        {% else %}#}
+                        <div class="card-header">
+                        <h3 class="card-title">
+                            <a>Хотите подписаться?</a>
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            Подписка на нашем сервисе даст вам возможность смотреть уникальный контент<br/>
+                            Вы поддержите авторов создавать новый контент - уникальный контент<br/>
+                            Введите сумму оплаты, для создания платежа<br/>
+                            Минимальная сумма - 100р<br/>
+                        </p>
+
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success">Ввести</button>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

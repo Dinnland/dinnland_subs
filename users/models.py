@@ -1,8 +1,11 @@
+from django.core.validators import MinValueValidator
+
 from . import managers
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from phonenumber_field.modelfields import PhoneNumberField
+from django.utils.timezone import now
 
 NULLABLE = {'null': True, 'blank': True}
 
@@ -11,17 +14,9 @@ NULLABLE = {'null': True, 'blank': True}
 
 class User(AbstractUser):
     """Пользователь сервиса"""
-    # ROLE_CHOICES = (
-    #     ('sub', 'Подписчик'),
-    #     ('author', 'Автор'),
-    # )
-    # role = models.CharField(max_length=50, default='sub', choices=ROLE_CHOICES, verbose_name='Роль пользователя')
-    # name = models.CharField(max_length=100, verbose_name='Имя', **NULLABLE)
-    # surname = models.CharField(max_length=100, verbose_name='Фамилия', **NULLABLE)
     username = None
     email = models.EmailField(unique=True, verbose_name='Email', blank=True, default=None)
     phone = PhoneNumberField(unique=True, verbose_name='Номер телефона')
-    # nickname = models.CharField(unique=True, max_length=15, verbose_name='nickname', **NULLABLE)
     patronymic = models.CharField(max_length=25, verbose_name='Отчество', **NULLABLE)
 
     avatar = models.ImageField(upload_to='users/', verbose_name='Аватар - фото пользователя', **NULLABLE)
@@ -30,11 +25,8 @@ class User(AbstractUser):
     subscription = models.BooleanField(default=False, verbose_name='Подписка на сервис')
     date_of_subscription = models.DateTimeField(verbose_name='Дата Подписки', **NULLABLE)
     access_code = models.CharField(max_length=10, verbose_name='Код доступа', **NULLABLE)
+    payment_pk = models.CharField(max_length=10, verbose_name='id платежа', **NULLABLE)
 
-    # if phone is not None:
-    #     USERNAME_FIELD = 'phone'
-    # elif email is not None:
-    #     USERNAME_FIELD = 'email'
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = []
 
@@ -53,3 +45,17 @@ class User(AbstractUser):
             self.email = None
 
         super().save(*args, **kwargs)  # Python3-style super()
+
+
+class Payment(models.Model):
+    """Платеж"""
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='пользователь', related_name='the_user')
+    date_of_payment = models.DateTimeField(default=now)
+    payment_amount = models.IntegerField(validators=[MinValueValidator(100)], verbose_name='сумма оплаты')
+    is_paid = models.BooleanField(default=False, verbose_name='статус оплаты')
+    session = models.CharField(max_length=180, verbose_name='сессия для оплаты', **NULLABLE)
+
+    class Meta:
+        verbose_name = 'Платеж'
+        verbose_name_plural = 'Платежи'
+        ordering = ('-date_of_payment',)

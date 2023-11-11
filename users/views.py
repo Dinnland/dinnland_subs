@@ -1,5 +1,6 @@
 import random
 
+import stripe
 from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -9,23 +10,29 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.generic import *
+from rest_framework import generics
+from rest_framework.generics import get_object_or_404
+
 
 from users.forms import (UserRegisterForm, UserProfileForm, UserForgotPasswordForm, UserSetNewPasswordForm,
-                         UserCodeForm, NewAccessCodeForm, NewPasswordForm)
-from users.models import User
+                         UserCodeForm, NewAccessCodeForm, SubscriptionCreateForm)
+from users.models import User, Payment
 
 from pprint import pprint
 from smsaero import SmsAero
 
-# Create your views here.
+from users.serializers.serializers import PaymentSerializer
+from users.services import get_session, retrieve_session
+
 SMSAERO_EMAIL = settings.SMSAERO_EMAIL
 SMSAERO_API_KEY = settings.SMSAERO_API
+
 
 class ProfileView(LoginRequiredMixin, UpdateView):
     """ Просмотр профиля пользователя """
@@ -119,7 +126,6 @@ class UserConfirmEmailView(View):
 
 class EmailConfirmationSentView(TemplateView):
     """Реализация сообщения об отправке письма для подтверждения email"""
-
     template_name = 'users/registration/email_confirmation_sent.html'
 
     def get_context_data(self, **kwargs):
@@ -130,7 +136,6 @@ class EmailConfirmationSentView(TemplateView):
 
 class EmailConfirmedView(TemplateView):
     """Реализация сообщения об успешном подтверждении email"""
-
     template_name = 'users/registration/email_confirmed.html'
 
     def get_context_data(self, **kwargs):
@@ -141,7 +146,6 @@ class EmailConfirmedView(TemplateView):
 
 class EmailConfirmationFailedView(TemplateView):
     """Сообщения - неуспешное подтверждение email"""
-
     template_name = 'users/registration/email_confirmation_failed.html'
 
     def get_context_data(self, **kwargs):
@@ -152,7 +156,6 @@ class EmailConfirmationFailedView(TemplateView):
 
 class DoneGenerateNewPassword(TemplateView):
     """Пароль отправлен на почту"""
-
     template_name = 'users/registration/done_gen_passw.html'
 
     def get_context_data(self, **kwargs):
@@ -161,13 +164,10 @@ class DoneGenerateNewPassword(TemplateView):
         return context
 
 
-
-
 class UserForgotPasswordEmailView(SuccessMessageMixin, PasswordResetView):
     """Представление по сбросу пароля по почте"""
-    # ПРАВИЛЬНО
+
     form_class = UserForgotPasswordForm
-    # template_name = 'users/registration/done_gen_passw.html'
     template_name = 'users/user_password_reset.html'
 
     success_url = reverse_lazy('users:done_generate_new_password/')
@@ -193,9 +193,6 @@ class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView
         context = super().get_context_data(**kwargs)
         context['title'] = 'Установить новый пароль'
         return context
-
-
-
 
 
 def generate_new_password(request):
@@ -256,7 +253,6 @@ class PhoneRegisterView(CreateView):
 
         # Функционал для генерации кода и его отправки
         generate_access_code(self, db_user=user, message='Your code:')
-        # db_user.access_code = None
 
         return redirect('users:access-code')
 
@@ -281,7 +277,6 @@ class PhoneCodeView(FormView):
         db_user = User.objects.filter(phone=form_user)
         if db_user:
             db_user = db_user[0]
-
             db_user_access_code = db_user.access_code
             if form_access_code == db_user_access_code:
                 db_user.is_active = True
@@ -380,20 +375,16 @@ class CheckAccessCodeForPassword(FormView):
             if form_access_code == db_user.access_code:
                 new_password = get_random_string(length=12)
                 db_user.set_password(new_password)
-
-                print('Новый пароль-', new_password)
                 db_user.access_code = None
                 db_user.save()
-                format_phone = str(db_user.phone)[2:]
                 Site.objects.clear_cache()
-                # Отправка кода на телефон
-                # sms_ru = SmsRu(settings.SMS_RU_API_ID)
-                # print(sms_ru)
-                # sms_ru.send(format_phone, message=f"Vash parol':{new_password}")
 
-                # smsc = SMSC()
-                # smsc.send_sms(db_user.phone, "Your code: {}".format(access_code), sender = "sms")
-                # return render(request, 'core/next.html', content)
+                # Отправка кода на телефон
+                format_phone = str(db_user.phone)[1:]
+                int_phone = int(format_phone)
+                # print('Новый пароль-', new_password)
+                data = send_sms(phone=int_phone, message=f'Ваш новый пароль: {new_password}')
+                pprint(data)
                 return redirect('users:login')
             else:
                 return redirect('users:access_code_failed')
@@ -404,37 +395,23 @@ class CheckAccessCodeForPassword(FormView):
 def generate_access_code(queryset, db_user, message):
     """ Функционал для генерации кода и его отправки """
     access_code = random.randrange(1000, 9999)
+    # print(f'это access код {db_user.access_code}')
     db_user.access_code = access_code
 
-    print(f'это м сделали код {db_user.access_code}')
     db_user.save()
     Site.objects.clear_cache()
 
     # Отправка кода на телефон
     format_phone = str(db_user.phone)[1:]
     int_phone = int(format_phone)
-    message = f'{message}: {db_user.access_code}'
-    print(int_phone, message)
-    print(SMSAERO_EMAIL, SMSAERO_API_KEY)
+    message = f'{message}{db_user.access_code}'
+    send_sms(phone=int_phone, message=message)
+    # pprint(data)
 
-    data = send_sms(phone=int_phone, message=f'{message} {db_user.access_code}')
-    pprint(data)
-
-    # sms_ru = SmsRu(settings.SMS_RU_API_ID)
-    # print(format_phone)
-    # print(sms_ru.send(format_phone,from_name='dinnlandworksub2023@sms.ru', message=f'{message}: {db_user.access_code}'))
-    # smslimit = sms_ru.limit()
-    # free_response = sms_ru.free()
-    # senders = sms_ru.senders()
-    # balance = sms_ru.balance()
-    # print(smslimit,free_response,senders,balance)
-
-    # smsc = SMSC()
-    # smsc.send_sms(profile.phone, "Your code: {}".format(access_code), sender = "sms")
-    # return render(request, 'core/next.html', content)
 
 def send_sms(phone: int, message: str) -> dict:
     """
+    Функция отправки смс через сервис SmsAero.
     Send sms and return results.
             Parameters:
                     phone (int): Phone number
@@ -442,8 +419,129 @@ def send_sms(phone: int, message: str) -> dict:
             Returns:
                     data (dict): API request result
     """
-
     api = SmsAero(SMSAERO_EMAIL, SMSAERO_API_KEY)
     res = api.send(phone, message)
     assert res.get('success'), res.get('message')
     return res.get('data')
+
+
+# Payment -----------------------------------------------------------------------------------------------------------
+
+
+class PaymentCreateView(CreateView):
+    """ Создаем платеж """
+    model = Payment
+    template_name = 'users/subscription.html'
+    form_class = SubscriptionCreateForm
+    success_url = reverse_lazy('users:subscription')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Создаем платеж'
+        context['req_user'] = self.request.user
+        vv = Payment.objects.filter(user=self.request.user)
+        context['subscr'] = vv
+        context['qwertyop'] = 'rrrrr'
+        return context
+
+    def form_valid(self, form):
+        user = self.request.user
+        if Payment.objects.filter(user=user):
+            return HttpResponse("Под вашим аккаунтом уже создан платеж, посмотрите, посмотрите, активный ли он")
+        else:
+            payment = form.save(commit=False)
+            form_payment_amount = form.cleaned_data['payment_amount']
+            payment.payment_amount = int(form_payment_amount) * 100
+            stripe.api_key = settings.STRIPE_SECRET_KEY
+            payment.user = user
+            print(payment.user)
+            payment.is_paid = False
+            payment.session = get_session(payment).id
+            payment.save()
+            user.payment_pk = payment.id
+            user.save()
+            print(user.payment_pk)
+            # customers = stripe.Customer.list()
+
+            return redirect(f'users:payment-retrieve', payment.pk)
+
+    def get_object(self, queryset=None):
+        print(self.request.user)
+        return self.request.user
+
+
+class PaymentRetrieveView(ListView):
+    """ Получаем ссылку на оплату Payment"""
+    model = Payment
+    # context_object_name = 'payment_list'
+    queryset = Payment.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Создаем платеж '
+        context['req_user'] = self.request.user
+        context['qwerty'] = 'final'
+        return context
+
+    def get(self, request, *args, **kwargs):
+        print('hi')
+        self.obj = get_object_or_404(self.get_queryset(), pk=self.kwargs['pk'])
+        session = retrieve_session(self.obj.session)
+        print(self.obj)
+        print(self.obj.pk)
+        print(session.payment_status)
+        print(self.request.user)
+        if session.payment_status == 'paid' and session.status == 'complete':
+            self.obj.is_paid = True
+            self.obj.save()
+            self.request.user.subscription = True
+            self.request.user.save()
+        # self.check_object_permissions(self.request, self.obj)
+        stripe_url = session["url"]
+        print('dd', stripe_url)
+        content = {'stripe_url': stripe_url}
+        return render(request, 'users/payment_url.html', content)
+
+    def get_object(self, queryset=None):
+        print(self.request.user)
+        return self.request.user
+
+
+class PaymentListView(generics.ListAPIView):
+    """ Получаем список Payment"""
+    serializer_class = PaymentSerializer
+    queryset = Payment.objects.all()
+
+    # filter_backends = [DjangoFilterBackend, OrderingFilter]
+    # Фильтр по 'course', 'lesson', 'payment_type'
+    filterset_fields = ('course', 'lesson', 'payment_type')
+    # сортировка по дате оплаты
+    ordering_fields = ('date_of_payment',)
+
+
+class PaymentSuccessView(ListView):
+    """ Проверка """
+    model = Payment
+    context_object_name = 'payment_list'
+    queryset = Payment.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        req_user = self.request.user
+        print(req_user)
+        us_payment_pk = req_user.payment_pk
+        print(us_payment_pk)
+        self.obj = get_object_or_404(self.get_queryset(), pk=self.kwargs['pk'])
+        session = retrieve_session(self.obj.session)
+
+        if session.payment_status == 'paid' and session.status == 'complete':
+            self.obj.is_paid = True
+            self.obj.save()
+            self.request.user.subscription = True
+            self.request.user.save()
+        # self.check_object_permissions(self.request, self.obj)
+        stripe_url = session["url"]
+        content = {'stripe_url': stripe_url}
+        return render(request, 'users/payment_url.html', content)
+
+    def get_object(self, queryset=None):
+        return self.request.user

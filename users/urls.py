@@ -1,6 +1,6 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
-
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from users.apps import UsersConfig
 from users.views import *
 
@@ -9,7 +9,7 @@ app_name = UsersConfig.name
 urlpatterns = [
     path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    ### path('cabinet/', ProfileView.as_view(), name='profile'),
+    # path('cabinet/', ProfileView.as_view(), name='profile'),
     path('email-register/', EmailRegisterView.as_view(), name='register'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('profile/genpassword/', generate_new_password, name='generate_new_password'),
@@ -34,6 +34,14 @@ urlpatterns = [
     path('make-access-for-password/', NewAccessCodeForPasswordPhone.as_view(), name='make_access_for_password'),
     path('check-access-for-password/', CheckAccessCodeForPassword.as_view(),
          name='check_access_for_password'),
-    # path('make-new-password/', MakeNewPassword.as_view(), name='make_new_password'),
+    path('payment/list/', PaymentListView.as_view(), name='payment-list'),
+    path('payment/create/', PaymentCreateView.as_view(), name='payment-create'),
+    path('payment/<int:pk>/retrieve/', PaymentRetrieveView.as_view(), name='payment-retrieve'),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('payment_create/', PaymentCreateView.as_view(), name='payment-create'),
+    path('success/<int:pk>/', PaymentRetrieveView.as_view(), name='stripe-success'),
+    path('success/', RedirectView.as_view(pattern_name='users:payment-create'), name='register'),
+    # path('success/', RedirectView),
 
 ]

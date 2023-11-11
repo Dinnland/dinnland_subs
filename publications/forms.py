@@ -16,20 +16,12 @@ class StyleFormMixin:
 class PublicationForm(forms.ModelForm, StyleFormMixin):
     class Meta:
         model = Publication
-        fields = ('header', 'content', 'image', 'video')
-    # def __init__(self, *args, **kwargs):
-    #     """Делаем поле 'email' and 'phone' - Readonly"""
-    #     super(StyleFormMixin, self).__init__(*args, **kwargs)
-    #     # instance = getattr(self, 'instance', None)
-    #     self.fields['body'].widget.attrs.update({'class': 'form-control'})
-    #
-    # def __init__(self, *args,  **kwargs):
-    #     super().__init__(*args, **kwargs)
-        # self.fields['date_of_create'].widget = DateInput(attrs={'type': 'datetime-local'})
+        fields = ('header', 'content', 'image', 'video', 'is_paid')
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+    #     for field_name, field in self.fields.items():
+    #         field.widget.attrs['class'] = 'form-control'
 
 
 

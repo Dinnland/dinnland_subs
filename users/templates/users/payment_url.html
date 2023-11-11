@@ -1,0 +1,36 @@
+{% extends 'publications/base.html' %}
+{% load publication_tag %}
+{% block content %}
+
+    <div class="col-12">
+        <form class="row" method="post" enctype="multipart/form-data">
+
+            <div class="col-sm-8 mx-auto">
+                {% if req_user.subscription == 'true' %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <a>Подписка оформлена</a>
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Спасибо, что поддерживаете авторов. В благодарность вам - уникальный контент</p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <a>Почти все</a>
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <a href="{{ stripe_url }}">Для оплаты перейдите по ссылке</a>
+                        </div>
+                    </div>
+
+                {% endif %}
+            </div>
+        </form>
+    </div>
+{% endblock %}
