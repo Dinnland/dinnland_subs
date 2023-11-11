@@ -1,11 +1,7 @@
 from django import forms
-from datetime import datetime
-from django.forms import DateTimeInput, DateInput
-from django.views.generic.edit import FormMixin
 from publications.models import Publication
-# from publications.models import (MailingSettings, MessageToMailing, Client)
 
-# //////////////////////////////////////////////////////////////////
+
 class StyleFormMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -20,48 +16,5 @@ class PublicationForm(forms.ModelForm, StyleFormMixin):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-    #     for field_name, field in self.fields.items():
-    #         field.widget.attrs['class'] = 'form-control'
 
 
-
-# //////////////////////////////////////////////////////////////////
-
-
-# class ContactForm(forms.Form):
-#     from_email = forms.EmailField(label='Email', required=True)
-#     subject = forms.CharField(label='Тема', required=True)
-#     message = forms.CharField(label='Сообщение', widget=forms.Textarea, required=True)
-
-
-# class FormMixin:
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         for field_name, field in self.fields.items():
-#             field.widget.attrs['class'] = 'form-control-10'
-
-
-
-
-# class MailingSettingsFormNotUser(forms.ModelForm):
-#
-#     def __init__(self, *args, user=None, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields['mailing_start_time'].widget = DateInput(attrs={'type': 'datetime-local'})
-#         self.fields['mailing_end_time'].widget = DateInput(attrs={'type': 'datetime-local'})
-#         self.user = user
-#         self.fields['clients'].queryset = Client.objects.filter(owner=self.user)
-#         self.fields['mail'].queryset = MessageToMailing.objects.filter(owner=self.user)
-#
-#     class Meta:
-#         model = MailingSettings
-#         fields = '__all__'
-#         # exclude = ('mailing_status', 'owner',)
-
-
-# class MailingFilterForm(forms.Form):
-#     status_choices = MailingSettings.STATUS_CHOICES
-#
-#     status = forms.ChoiceField(choices=[('', 'Все')] + list(status_choices),
-#                                required=False,
-#                                widget=forms.Select(attrs={'id': 'status'}))

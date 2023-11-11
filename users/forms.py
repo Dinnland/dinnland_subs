@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm, PasswordResetForm, SetPasswordForm, UsernameField
 from django.utils.text import capfirst
-
 from publications.forms import StyleFormMixin
 from users.models import User, Payment
 from django.contrib.auth.forms import UserCreationForm
@@ -32,7 +31,6 @@ class UserProfileForm(StyleFormMixin, UserChangeForm):
         instance = getattr(self, 'instance', None)
         if instance and instance.pk:
             self.fields['phone'].widget.attrs['readonly'] = True
-            # self.fields['subscription'].widget.attrs['readonly'] = True
 
     def clean_phone(self):
         """Функция clean_phone гарантирует, что readonly значение не будет переопределено объектом POST."""
@@ -45,12 +43,6 @@ class UserProfileForm(StyleFormMixin, UserChangeForm):
     class Meta:
         model = User
         fields = ('phone', 'email', 'first_name', 'last_name', 'avatar', 'country')
-
-
-# class UserCodeForm1(StyleFormMixin, forms.ModelForm, ):
-#     class Meta:
-#         model = User
-#         fields = ('phone', 'access_code',)
 
 
 class NewAccessCodeForm(StyleFormMixin, forms.Form):

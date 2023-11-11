@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from rest_framework.permissions import IsAuthenticated
-
 from publications.forms import *
 from pytils.translit import slugify
 from django.urls import reverse_lazy, reverse
@@ -12,14 +11,12 @@ from users.models import User
 def base(request):
     """ Базовый шаблон с меню, футером и тд """
     context = {'title': 'Dinnland-publications'}
-    # return render(request, 'publications/base1.html', context)
     return render(request, 'publications/base.html', context)
 
 
 class HomeListView(LoginRequiredMixin,  ListView):
     """Главная стр с TemplateView LoginRequiredMixin,  ListView"""
     model = Publication
-
     template_name = 'publications/includes/home.html'
     login_url = 'publications:not_authenticated'
 
@@ -128,8 +125,6 @@ class PublicationUpdateView(LoginRequiredMixin, UpdateView):
 class PublicationDeleteView(LoginRequiredMixin, DeleteView):
     """Страница для удаления блога"""
     model = Publication
-    # fields = ('__all__')
-    # fields = ('header', 'content', 'image')
     success_url = reverse_lazy('publications:publication_list')
 
     # def get_queryset(self, queryset=None, *args, **kwargs):
@@ -137,6 +132,7 @@ class PublicationDeleteView(LoginRequiredMixin, DeleteView):
     #     queryset = super().get_queryset(*args, **kwargs)
     #     queryset = queryset.filter(sign_of_publication=True)
     #     return queryset
+
 
 class NotAuthenticated(ListView):
     """not_authenticated"""

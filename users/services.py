@@ -16,7 +16,6 @@ def get_session(instance):
     )
 
     session = stripe.checkout.Session.create(
-        # payment_method_types=['card'],
         line_items=[
             {
 
@@ -27,7 +26,6 @@ def get_session(instance):
         mode='payment',
         success_url=YOUR_DOMAIN + '/success/',
         cancel_url=YOUR_DOMAIN + '/cancel/',
-        # надеюсь сработает
         customer_email=f"{instance.user.email}",
     )
     return session
