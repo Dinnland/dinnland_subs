@@ -1,5 +1,4 @@
 import random
-
 import stripe
 from django.conf import settings
 from django.contrib.auth import login
@@ -19,14 +18,11 @@ from django.views.generic import *
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
 
-
 from users.forms import (UserRegisterForm, UserProfileForm, UserForgotPasswordForm, UserSetNewPasswordForm,
                          UserCodeForm, NewAccessCodeForm, SubscriptionCreateForm)
 from users.models import User, Payment
-
 from pprint import pprint
 from smsaero import SmsAero
-
 from users.serializers.serializers import PaymentSerializer
 from users.services import get_session, retrieve_session
 
@@ -46,15 +42,9 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
 class UserDeleteView(LoginRequiredMixin, DeleteView):
     """Страница для удаления User"""
-
-    # PermissionRequiredMixin,
     model = User
     success_url = reverse_lazy('publications:home')
-
-    # ограничение доступа анонимных пользователей # 19 Уведомление для неавторизованных пользователей
-    # login_url = 'mail_upp:not_authenticated'
     permission_required = 'users.delete_user'
-    # success_message = 'Материал был успешно Удален'
 
 
 class UsersListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
@@ -65,7 +55,6 @@ class UsersListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def test_func(self):
         return self.request.user.groups.filter(name='moderator').exists()
-
 
 # Работа с аккаунтом по email
 
@@ -90,9 +79,7 @@ class EmailRegisterView(CreateView):
         token = default_token_generator.make_token(user)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         activation_url = reverse_lazy('users:confirm_email', kwargs={'uidb64': uid, 'token': token})
-        # Site.objects.clear_cache()
         current_site = Site.objects.get_current().domain
-
         send_mail(
             subject='Подтвердите свой электронный адрес',
             message=f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты:'
@@ -106,14 +93,12 @@ class EmailRegisterView(CreateView):
 
 class UserConfirmEmailView(View):
     """ Верификация пользователя по ссылке, отправленной на email """
-
     def get(self, request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64)
             user = User.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
-
         if user is not None and default_token_generator.check_token(user, token):
             user.is_active = True
             user.is_verified = True
@@ -166,10 +151,8 @@ class DoneGenerateNewPassword(TemplateView):
 
 class UserForgotPasswordEmailView(SuccessMessageMixin, PasswordResetView):
     """Представление по сбросу пароля по почте"""
-
     form_class = UserForgotPasswordForm
     template_name = 'users/user_password_reset.html'
-
     success_url = reverse_lazy('users:done_generate_new_password/')
     success_message = 'Письмо с инструкцией по восстановлению пароля отправлена на ваш email'
     subject_template_name = 'users/email/password_subject_reset_mail.txt'
@@ -183,7 +166,6 @@ class UserForgotPasswordEmailView(SuccessMessageMixin, PasswordResetView):
 
 class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
     """Установки нового пароля"""
-
     form_class = UserSetNewPasswordForm
     template_name = 'users/user_password_set_new.html'
     success_url = reverse_lazy('publications:home')
@@ -208,7 +190,7 @@ def generate_new_password(request):
         )
         request.user.set_password(new_password)
         request.user.save()
-        return redirect(reverse('users:DoneGenerateNewPassword'))
+        return redirect(reverse('users:done_generate_new_password'))
     else:
         return redirect('users:email_confirmation_failed')
 
@@ -250,10 +232,8 @@ class PhoneRegisterView(CreateView):
         user = form.save(commit=False)
         user.is_active = False
         user.save()
-
         # Функционал для генерации кода и его отправки
         generate_access_code(self, db_user=user, message='Your code:')
-
         return redirect('users:access-code')
 
     def get_object(self, queryset=None):
@@ -371,18 +351,15 @@ class CheckAccessCodeForPassword(FormView):
         db_user = User.objects.filter(phone=form_user)
         if db_user:
             db_user = db_user[0]
-
             if form_access_code == db_user.access_code:
                 new_password = get_random_string(length=12)
                 db_user.set_password(new_password)
                 db_user.access_code = None
                 db_user.save()
                 Site.objects.clear_cache()
-
                 # Отправка кода на телефон
                 format_phone = str(db_user.phone)[1:]
                 int_phone = int(format_phone)
-                # print('Новый пароль-', new_password)
                 data = send_sms(phone=int_phone, message=f'Ваш новый пароль: {new_password}')
                 pprint(data)
                 return redirect('users:login')
@@ -395,9 +372,7 @@ class CheckAccessCodeForPassword(FormView):
 def generate_access_code(queryset, db_user, message):
     """ Функционал для генерации кода и его отправки """
     access_code = random.randrange(1000, 9999)
-    # print(f'это access код {db_user.access_code}')
     db_user.access_code = access_code
-
     db_user.save()
     Site.objects.clear_cache()
 
@@ -406,7 +381,7 @@ def generate_access_code(queryset, db_user, message):
     int_phone = int(format_phone)
     message = f'{message}{db_user.access_code}'
     send_sms(phone=int_phone, message=message)
-    # pprint(data)
+    return db_user
 
 
 def send_sms(phone: int, message: str) -> dict:
@@ -428,7 +403,7 @@ def send_sms(phone: int, message: str) -> dict:
 # Payment -----------------------------------------------------------------------------------------------------------
 
 
-class PaymentCreateView(CreateView):
+class PaymentCreateView(LoginRequiredMixin, CreateView):
     """ Создаем платеж """
     model = Payment
     template_name = 'users/subscription.html'
@@ -454,15 +429,13 @@ class PaymentCreateView(CreateView):
             payment.payment_amount = int(form_payment_amount) * 100
             stripe.api_key = settings.STRIPE_SECRET_KEY
             payment.user = user
-            print(payment.user)
+            # print(payment.user)
             payment.is_paid = False
             payment.session = get_session(payment).id
             payment.save()
             user.payment_pk = payment.id
             user.save()
-            print(user.payment_pk)
-            # customers = stripe.Customer.list()
-
+            # print(user.payment_pk)
             return redirect(f'users:payment-retrieve', payment.pk)
 
     def get_object(self, queryset=None):
@@ -470,10 +443,9 @@ class PaymentCreateView(CreateView):
         return self.request.user
 
 
-class PaymentRetrieveView(ListView):
+class PaymentRetrieveView(LoginRequiredMixin, ListView):
     """ Получаем ссылку на оплату Payment"""
     model = Payment
-    # context_object_name = 'payment_list'
     queryset = Payment.objects.all()
 
     def get_context_data(self, **kwargs):
@@ -484,26 +456,20 @@ class PaymentRetrieveView(ListView):
         return context
 
     def get(self, request, *args, **kwargs):
-        print('hi')
         self.obj = get_object_or_404(self.get_queryset(), pk=self.kwargs['pk'])
         session = retrieve_session(self.obj.session)
-        print(self.obj)
-        print(self.obj.pk)
-        print(session.payment_status)
-        print(self.request.user)
         if session.payment_status == 'paid' and session.status == 'complete':
             self.obj.is_paid = True
             self.obj.save()
             self.request.user.subscription = True
             self.request.user.save()
-        # self.check_object_permissions(self.request, self.obj)
         stripe_url = session["url"]
-        print('dd', stripe_url)
         content = {'stripe_url': stripe_url}
         return render(request, 'users/payment_url.html', content)
 
+
+
     def get_object(self, queryset=None):
-        print(self.request.user)
         return self.request.user
 
 
@@ -512,33 +478,25 @@ class PaymentListView(generics.ListAPIView):
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
 
-    # filter_backends = [DjangoFilterBackend, OrderingFilter]
-    # Фильтр по 'course', 'lesson', 'payment_type'
     filterset_fields = ('course', 'lesson', 'payment_type')
     # сортировка по дате оплаты
     ordering_fields = ('date_of_payment',)
 
 
-class PaymentSuccessView(ListView):
+class PaymentSuccessView(LoginRequiredMixin, ListView):
     """ Проверка """
     model = Payment
     context_object_name = 'payment_list'
     queryset = Payment.objects.all()
 
     def get(self, request, *args, **kwargs):
-        req_user = self.request.user
-        print(req_user)
-        us_payment_pk = req_user.payment_pk
-        print(us_payment_pk)
         self.obj = get_object_or_404(self.get_queryset(), pk=self.kwargs['pk'])
         session = retrieve_session(self.obj.session)
-
         if session.payment_status == 'paid' and session.status == 'complete':
             self.obj.is_paid = True
             self.obj.save()
             self.request.user.subscription = True
             self.request.user.save()
-        # self.check_object_permissions(self.request, self.obj)
         stripe_url = session["url"]
         content = {'stripe_url': stripe_url}
         return render(request, 'users/payment_url.html', content)
