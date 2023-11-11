@@ -1,13 +1,60 @@
 {% extends "publications/base.html" %}
 
 {% block content %}
-<div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">Вы не авторизованы!</h4>
-    <p>
-        Для того, что бы взаимодействовать с продуктами, войдите под своей учетной записью!
-    </p>
-            <a class="p-2 btn btn-outline-primary" href={% url 'users:login' %}>Войти</a>
-            <a class="p-2 btn btn-outline-primary" href={% url 'users:register' %}>Регистрация</a>
-</div>
+    {% load publication_tag %}
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Вы не авторизованы!</h4>
+        <p>
+            Для того, что бы взаимодействовать с продуктами, войдите под своей учетной записью!
+        </p>
+        <a class="p-2 btn btn-outline-primary" href={% url 'users:login' %}>Войти</a>
+        <a class="p-2 btn btn-outline-primary" href={% url 'users:register' %}>Регистрация по @email</a>
+        <a class="p-2 btn btn-outline-primary" href={% url 'users:phone_register' %}>Регистрация по телефону</a>
+    </div>
+    <div class="col-8 mt-4 mx-auto">
+        <div class="card mb-4 box-shadow">
+            <div class="row">
+                <div class="row">
+
+                    <div class="py-5">
+                        <div class="container">
+                            <div class="row">
+                                <p>Публикации:</p>
+                                <div class="row">
+                                    {% for publication in publication_list %}
+                                        <div class="col-4 mt-4">
+                                            <div class="card mb-4 box-shadow">
+                                                <div class="card-header d-flex align-items-center justify-content-center"
+                                                     style="height: 100px">
+                                                    <h4 class="my-0 font-weight-normal">{{ publication.header }}</h4>
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled mt-3 mb-6 text-start m-3">
+
+                                                        <img class="card-img-top"
+                                                             src="{{ publication.image|mediapath }}"
+                                                             alt="Card image cap">
+
+                                                    </ul>
+                                                    <p>{% if publication.content|length <= 50 %}
+                                                        <li>{{ publication.content }}</li>
+                                                    {% else %}
+                                                        <li>{{ publication.content|slice:":50" }}...</li>
+                                                    {% endif %}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 {% endblock %}
 

@@ -1,0 +1,111 @@
+{% extends 'publications/base.html' %}
+{% block content %}
+    {% load publication_tag %}
+
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% if user.is_authenticated %}
+                        <div class="row">
+                            {% for author in author_pk %}
+                                <div class="col-8 mt-4 mx-auto">
+                                    <div class="card mb-4 box-shadow">
+                                        <div class="row">
+
+                                            <div class="col mt-8 img">
+                                                <div class="card-body"><h3>{{ author.get_full_name }}</h3>
+                                                    <ul class="list-unstyled mt-6 mb-6 text-start m-3">
+                                                        <h5>{{ author.country }}</h5>
+                                                        <h5>{{ author.email }}</h5>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="col ">
+                                                <div class="card mb-4 box-shadow">
+                                                    {#                                            <ul class="list-unstyled mt-3 mb-6 text-start m-3">#}
+                                                    <img class="card-img-top "
+                                                         src="{{ author.avatar|mediapath }}"
+                                                         alt="Card image cap">
+                                                    {#                                            </ul>#}
+                                                </div>
+                                            </div>
+                                            {#                                            <div class="col-4 border">4</div>#}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="row">
+                            {% for publication in author_publication_list %}
+                                <div class="col-8 mt-4 mx-auto">
+                                    <div class="card mb-4 box-shadow">
+                                        <div class="card-header d-flex align-items-center justify-content-center"
+                                             style="height: 100px">
+                                            <div class="col-md-8 gy-3">
+                                                {#                                            <p>@ {{ publication.owner.get_full_name }} {{ publication.owner.pk }}</p>#}
+                                                <a href="{% url "publications:author_publication_list" publication.owner.pk %}"
+                                                   style="text-decoration: none; color: black">
+
+                                                    <h4
+                                                            class="my-0 font-weight-normal">
+                                                        @ {{ publication.owner.get_full_name }} {{ publication.owner.pk }}
+                                                    </h4>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-5 gy-2">
+                                                <a href="{% url "publications:viewpublication" publication.pk %}"
+                                                   style="text-decoration: none; color: black"><h4
+                                                        class="my-0 font-weight-normal">{{ publication.header }}</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <ul class="list-unstyled mt-3 mb-6 text-start m-3">
+
+
+                                                {% if publication.image == '' %}
+                                                    {% if not publication.video == '' %}
+                                                        <video
+                                                                controls
+                                                                src="{{ publication.video|mediapathvideo }}"
+                                                                muted
+                                                        >Sorry, your browser doesn't support embedded videos
+                                                        </video>
+                                                    {% else %}
+                                                        <img class="card-img-top "
+                                                             src="{{ publication.image|mediapath }}"
+                                                             alt="Card image cap">
+                                                    {% endif %}
+                                                {% else %}
+                                                    <img class="card-img-top "
+                                                         src="{{ publication.image|mediapath }}"
+                                                         alt="Card image cap">
+
+                                                {% endif %}
+                                                <a href="{% url "publications:viewpublication" publication.pk %}"
+                                                   style="text-decoration: none; color: black"><h4
+                                                        class="my-0 ">{{ publication.content|slice:":70" }}...</h4>
+                                                </a>
+                                                <a>Просмотров: {{ publication.quantity_of_views }}</a>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

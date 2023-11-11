@@ -1,0 +1,10 @@
+{% extends "publications/base.html" %}
+
+{% block content %}
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Ошибка верификации</h4>
+        <p>Такого пользователя не существует. Пожалуйста, проверьте правильность введенного номера.</p>
+    </div>
+    <a class="p-2 btn-outline-primary" href={% url 'users:access-code' %}>Назад</a>
+
+{% endblock %}

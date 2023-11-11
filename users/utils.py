@@ -9,7 +9,7 @@ from django.core.mail import EmailMessage
 def send_email_for_verify(request, user):
     current_site = get_current_site(request)
     context = {
-        'user' : user,
+        'user': user,
         "domain": current_site.domain,
         "uid": urlsafe_base64_encode(force_bytes(user.pk)),
         "token": token_generator.make_token(user),

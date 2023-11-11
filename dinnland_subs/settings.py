@@ -36,7 +36,6 @@ else:
     ALLOWED_HOSTS = ['*']
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -50,8 +49,9 @@ INSTALLED_APPS = [
     # 'django.contrib.sites.models.Site',
 
     # django rest_framework (DRF)
-
-
+    'rest_framework',
+    'django_filters',
+    'rest_framework_simplejwt',
     # other
     # 'phone_field',
 
@@ -86,8 +86,7 @@ ROOT_URLCONF = 'dinnland_subs.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -141,8 +140,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 TIME_ZONE = 'UTC'
 # TIME_ZONE = 'Europe/Moscow'
 
@@ -206,14 +205,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    # ВСЕ ЗАКРЫВАЕТСЯ АУТЕНТИФИКАЦИЕЙ
-    'DEFAULT_PERMISSION_CLASSES': [
-            'rest_framework.permissions.IsAuthenticated',
-        ],
-    # # По отдельности ЗАКРЫВАЕТСЯ АУТЕНТИФИКАЦИЕЙ
+    # # ВСЕ ЗАКРЫВАЕТСЯ АУТЕНТИФИКАЦИЕЙ
     # 'DEFAULT_PERMISSION_CLASSES': [
-    #    'rest_framework.permissions.AllowAny',
-    #       ],
+    #         'rest_framework.permissions.IsAuthenticated',
+    #     ],
+    # По отдельности ЗАКРЫВАЕТСЯ АУТЕНТИФИКАЦИЕЙ
+    'DEFAULT_PERMISSION_CLASSES': [
+       'rest_framework.permissions.AllowAny',
+          ],
 
 }
 
@@ -231,5 +230,6 @@ CORS_ALLOW_ALL_ORIGINS = False
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 
-
-
+# ID для отправки смс
+SMSAERO_API = os.getenv('SMSAERO_API')
+SMSAERO_EMAIL = os.getenv('SMSAERO_EMAIL')

@@ -2,56 +2,89 @@
 {% load publication_tag %}
 {% block content %}
     <div class="pricing-header px-3 py-3 pt-md-4 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">{{ title }}_блог</h1>
 
 
-    </div>
-
-    <div class="col-12">
-        <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">
-                Это не видеоБЛОГ
-            </h3>
+        <div class="row justify-content-center">
+            <div class="col-md-1 gy-2">
+                <a class="btn btn-primary " href="{% url 'publications:publication_list' %}">&larr;</a>
+            </div>
+            <div class="col-md-7 gy-0">
+                <h1 class="display-5">{{ title }}</h1>
+            </div>
         </div>
     </div>
-    <div class="card-body">
-        <table class="table">
 
-            <tr>
-                <td>Заголовок</td>
-                <td>{{ object.header }}</td>
-            </tr>
-            <tr>
-                <td>Изображение</td>
-                <td>{{ object.image }}</td>
-            </tr>
-            <tr>
-                <td>Содержание</td>
-                <td>{{ object.content }}</td>
-            </tr>
-            <tr>
-                <td>Ссылка</td>
-                <td>{{ object.slug }}</td>
-            </tr>
-            <tr>
-                <td>дата создания</td>
-                <td>{{ object.date_of_create }}</td>
-            </tr>
-            <tr>
-                <td>признак публикации</td>
-                <td>{{ object.sign_of_publication }}</td>
-            </tr>
-            <tr>
-                <td>количество просмотров</td>
-                <td>{{ object.quantity_of_views }}</td>
-            </tr>
-        </table>
-        <a class="btn btn-outline-primary mt-1 mb-2 " href="{% url 'publications:editblog' object.pk %}">Редактировать блог</a>
-        <a class="btn btn-outline-primary mt-1 mb-2 " href="{% url 'publications:deleteblog' object.pk %}">Удалить блог</a>
+    <div class="col-sm-8 mx-auto">
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+{#                    <tr>#}
+                        <td><small>Автор:</small></td>
+                        <td><b>{{ object.owner.get_full_name }} {{ object.owner.pk }}</b></td>
+{#                    </tr>#}
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            {#                <tr>#}
+            {#                    <td>Признак публикации</td>#}
+            {#                    <td>{{ object.sign_of_publication }}</td>#}
+            {#                </tr>#}
+
+
+            <div class="card mb-4 box-shadow">
+                <div class="card-header d-flex align-items-center justify-content-center"
+                     style="height: 100px">
+                    <h4 class="my-2 font-weight-normal">{{ publication.header }}</h4>
+                </div>
+                <p>Дата создания {{ publication.date_of_create }}</p>
+
+                <div class="card-body">
+                    {#                    <ul class="list-unstyled mt-3 mb-6 text-start m-3">#}
+                    {# <img>#}
+                    {#                    <img class="img-thumbnail"#}
+                    {#                    <img class="card-img-top max-width: 50% height: auto"#}
+                    <img class="card-img-top"
+{#                    <img class="img-fluid "#}
+
+                         src="{{ publication.image|mediapath }}"
+                         alt="Card image cap">
+                </div>
+
+                {% if not publication.video == '' %}
+                    <div class="card-body">
+                        <video src="{{ publication.video|mediapathvideo }}" controls></video>
+                    </div>
+                {% endif %}
+
+
+
+
+                {#                <div class="card-body">#}
+                {##}
+                {#                    <video src="{{ publication.video|mediapathvideo }}" controls></video>#}
+                {#                </div>#}
+
+
+                <div class="card-body">
+                    <p>
+                        {{ publication.content }}
+                    </p>
+                </div>
+                <a>Количество просмотров: {{ publication.quantity_of_views }}</a>
+            </div>
+        </div>
+
+
+        <a class="btn btn-outline-dark mt-1 mb-2 " href="{% url 'publications:editpublication' object.pk %}">Редактировать
+            пост</a>
+        <a class="btn btn-outline-danger mt-1 mb-2 " href="{% url 'publications:deletepublication' object.pk %}">Удалить
+            пост</a>
 
 
     </div>
-     </div>
+
 
 {% endblock %}

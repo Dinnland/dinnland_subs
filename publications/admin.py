@@ -7,7 +7,7 @@ from publications.models import *
 
 @admin.register(Publication)
 class PublicationAdmin(admin.ModelAdmin):
-    """Клиенты"""
-    list_display = ('header', 'content', 'image', 'date_of_create', 'quantity_of_views')
+    """Публикации"""
+    list_display = ('header', 'content', 'image', 'date_of_create', 'quantity_of_views', 'is_paid')
     list_filter = ('date_of_create', 'quantity_of_views')
     search_fields = ('header', 'content', 'date_of_create',)
