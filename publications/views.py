@@ -5,6 +5,8 @@ from rest_framework.permissions import IsAuthenticated
 from publications.forms import *
 from pytils.translit import slugify
 from django.urls import reverse_lazy, reverse
+
+from users.mixins import AuthorRequiredMixin, OnlyFunsMixin
 from users.models import User
 
 
@@ -21,8 +23,8 @@ class HomeListView(LoginRequiredMixin,  ListView):
     login_url = 'publications:not_authenticated'
 
 
-class PublicationListView(LoginRequiredMixin, ListView):
-    """Список публикаций"""
+class PublicationListView(OnlyFunsMixin, LoginRequiredMixin, ListView):
+    """Список всех публикаций"""
     model = Publication
     template_name = 'publications/publication_list.html'
     context_object_name = 'publication_list'
@@ -36,6 +38,62 @@ class PublicationListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         context_data['publication_all'] = Publication.objects.all().order_by('-date_of_create')
+        context_data['publication_last_3_date'] =\
+            Publication.objects.filter(sign_of_publication=True).order_by('-date_of_create')[:3]
+        if self.request.user.groups.first() == 'moderator':
+            context_data['qwerty'] = 'moderator'
+        elif self.request.user.groups.first() == 'Moderator':
+            context_data['qwerty'] = 'Moderator'
+        else:
+            context_data['qwerty'] = 'ne moderator'
+        context_data['user_gr_name'] = self.request.user.groups.name
+        context_data['user_gr_first'] = self.request.user.groups.first()
+        return context_data
+
+
+class FreePublicationListView(LoginRequiredMixin, ListView):
+    """Список бесплатных публикаций"""
+    model = Publication
+    template_name = 'publications/free_publication_list.html'
+    context_object_name = 'publication_list'
+
+    def get_queryset(self, queryset=None, *args, **kwargs):
+        """Метод для вывода ТОЛЬКО бесплатных публикаций"""
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(is_paid=False)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['free_publication_all'] = Publication.objects.filter(is_paid=False).order_by('-date_of_create')
+        context_data['publication_last_3_date'] =\
+            Publication.objects.filter(sign_of_publication=True).order_by('-date_of_create')[:3]
+        if self.request.user.groups.first() == 'moderator':
+            context_data['qwerty'] = 'moderator'
+        elif self.request.user.groups.first() == 'Moderator':
+            context_data['qwerty'] = 'Moderator'
+        else:
+            context_data['qwerty'] = 'ne moderator'
+        context_data['user_gr_name'] = self.request.user.groups.name
+        context_data['user_gr_first'] = self.request.user.groups.first()
+        return context_data
+
+
+class PaidPublicationListView(OnlyFunsMixin, LoginRequiredMixin, ListView):
+    """Список бесплатных публикаций"""
+    model = Publication
+    template_name = 'publications/paid_publication_list.html'
+    context_object_name = 'publication_list'
+
+    def get_queryset(self, queryset=None, *args, **kwargs):
+        """Метод для вывода ТОЛЬКО бесплатных публикаций"""
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(is_paid=False)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['paid_publication_all'] = Publication.objects.filter(is_paid=True).order_by('-date_of_create')
         context_data['publication_last_3_date'] =\
             Publication.objects.filter(sign_of_publication=True).order_by('-date_of_create')[:3]
         if self.request.user.groups.first() == 'moderator':
@@ -104,7 +162,7 @@ class PublicationDetailView(LoginRequiredMixin, DetailView):
         return reverse('publications:viewpublication', args=[self.kwargs.get('pk')])
 
 
-class PublicationUpdateView(LoginRequiredMixin, UpdateView):
+class PublicationUpdateView(AuthorRequiredMixin, LoginRequiredMixin, UpdateView):
     """Страница для Изменения блога"""
     model = Publication
     form_class = PublicationForm
@@ -122,7 +180,7 @@ class PublicationUpdateView(LoginRequiredMixin, UpdateView):
         return reverse('publications:viewpublication', args=[self.kwargs.get('pk')])
 
 
-class PublicationDeleteView(LoginRequiredMixin, DeleteView):
+class PublicationDeleteView(AuthorRequiredMixin, LoginRequiredMixin, DeleteView):
     """Страница для удаления блога"""
     model = Publication
     success_url = reverse_lazy('publications:publication_list')

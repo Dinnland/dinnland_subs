@@ -1,0 +1,1146 @@
+[
+{
+  "model": "sites.site",
+  "pk": 1,
+  "fields": {
+    "domain": "http://127.0.0.1:8000/",
+    "name": "http://127.0.0.1:8000/"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2023-10-29T22:43:06.848Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "2",
+    "object_repr": "+12345678911",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2023-10-29T23:30:58.830Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "2",
+    "object_repr": "+12345678911",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email\", \"\\u0421\\u0442\\u0440\\u0430\\u043d\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2023-10-30T00:53:57.216Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "http://127.0.0.1:8000/",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Domain name\", \"Display name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2023-11-03T23:34:48.474Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "3",
+    "object_repr": "Кость большого пальца",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 4,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 4,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 4,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 4,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 5,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 5,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 5,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 5,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 6,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 6,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 6,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 6,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add site",
+    "content_type": 7,
+    "codename": "add_site"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change site",
+    "content_type": 7,
+    "codename": "change_site"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete site",
+    "content_type": 7,
+    "codename": "delete_site"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view site",
+    "content_type": 7,
+    "codename": "view_site"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add Публикация",
+    "content_type": 8,
+    "codename": "add_publication"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change Публикация",
+    "content_type": 8,
+    "codename": "change_publication"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete Публикация",
+    "content_type": 8,
+    "codename": "delete_publication"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view Публикация",
+    "content_type": 8,
+    "codename": "view_publication"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add Платеж",
+    "content_type": 9,
+    "codename": "add_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change Платеж",
+    "content_type": 9,
+    "codename": "change_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete Платеж",
+    "content_type": 9,
+    "codename": "delete_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view Платеж",
+    "content_type": 9,
+    "codename": "view_payment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "users",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "sites",
+    "model": "site"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "publications",
+    "model": "publication"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "users",
+    "model": "payment"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "kl7zx18hlfbkrft583wd6o095iynuhwh",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSG8OqBL934DGWZAqoYmpV0Z_92QdKHbe865bxFx32rce17jzOIitDj9bgnpmdsA_MB2XyQtbVvnJIciD9rlbeH8uh7u30HFXkdtyTqjVQHjNE1mImWBkKgwQ0CfbTCAKig2ELw2XmPIoFxh0CWdk_h8AdJFN5A:1qzFiT:7QQ0b22FkiKvaJaREw3QECQHVtkC5ANv3EfzM7ibEZs",
+    "expire_date": "2023-11-18T12:25:29.571Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "t7tir4gczt97zkdonqi5hrfxtmrqlm2e",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAQRf-FtSGAAwMu3fsNZHhJ1UBS2pXx322TLnR7zrn3zTytS_XryLOfErswbdjpFwaKz9x2kx7U7p3H3pZ5CnxP-GEHv_WUX9ej_TuoNOq2dqEUQohSatQWlYKiLDkowkQNG0kyBivwLAsSklBogwEVNLkkwQj2-QLzRzcj:1r1xAl:AkzNwoEmtxU4W7jT0tGcpO5gPk3BArat4M0RZvfNjXM",
+    "expire_date": "2023-11-25T23:13:51.670Z"
+  }
+},
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$ZLlOd4J9FzZrvnpEkUSDED$QT0j+ciU5Hhz0pIaZ6K/nbTMskJ/VcVfAPhV0EPpGfI=",
+    "last_login": "2023-11-11T22:55:17.135Z",
+    "is_superuser": true,
+    "first_name": "Динар",
+    "last_name": "Мингазов",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-10-29T21:59:57.412Z",
+    "email": "mingazov.dinar@bk.ru",
+    "phone": "+79173966920",
+    "patronymic": null,
+    "avatar": "",
+    "country": "Россия",
+    "is_verified": true,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$YrGxxAwdr00R0VVNEguwlM$QsiY9e9zhNu/1/tc6dMU/Xa6eAJGGWkp746g2RjsZcs=",
+    "last_login": "2023-11-10T01:48:07.102Z",
+    "is_superuser": false,
+    "first_name": "Федор",
+    "last_name": "Егоров",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-10-29T22:06:50Z",
+    "email": "dinarek2013@gmail.com",
+    "phone": "+12345678911",
+    "patronymic": null,
+    "avatar": "users/Без_названия.jfif",
+    "country": "Россия",
+    "is_verified": true,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 21,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$oYnpouI3p2KcERYhPpWGqx$4N32CKL11qMnCPJbI/Ei63mUw1cAhOzhPbqnY5iBi4U=",
+    "last_login": "2023-11-09T14:07:04.983Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-09T12:46:36.902Z",
+    "email": "",
+    "phone": "+79173966900",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": true,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": "8511",
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 22,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$peAMSNha6hMFATW0myo7um$zHcv5hkmGIuOqkc38WtS+hZUvDH5yn+2MSljhLdArgM=",
+    "last_login": "2023-11-09T14:13:05.875Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-09T14:11:26.843Z",
+    "email": null,
+    "phone": "+79173966922",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": true,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": "1028",
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 23,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$G0kY9kSZCkkYjSeveoXpKL$D5dpTH96jAKXaV3C0B3VRg1Z5sLs/KgI6AxSqkppTHQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2023-11-09T14:13:17.573Z",
+    "email": null,
+    "phone": "+79173966923",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": true,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": "1601",
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 24,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$sOgujihWxvBbRSTTWzdBgq$gHvcNkJ3I2NFZrBsfpR5stBy1zH7yftvFypSkMtdin0=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-09T17:24:03.739Z",
+    "email": null,
+    "phone": "+79173966933",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": true,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": "1497",
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 25,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$DQrXAy2KHkTYCARybC57gk$WmDkGOu3ubNbWuDfkk7lpz8BOcdZ6E+5XWQvOD+D5fo=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2023-11-09T19:32:44.364Z",
+    "email": null,
+    "phone": "+79173966955",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": false,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": "7754",
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 26,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$ndVI9aRrKmRifZbne9j3yZ$oBLzW8rPzdo8th8AqZ3gb/JgFH2M+H5HfqjoX5YJ3Uo=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2023-11-09T22:52:30.619Z",
+    "email": "dinn.land@mail.ru",
+    "phone": "+79173966966",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": false,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 27,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$Wcv3OJ2Zxp9schOt7JCNUL$mynncZT6cV3XNL+BGlm+Wvo+DCdn0DU1VcJFAX48rF0=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2023-11-10T01:01:10.682Z",
+    "email": null,
+    "phone": "+79173966999",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": false,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 53,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$6IootddlRXDHv8Qod2LC72$BeSdJ56lQuupIlnST/zj/w73jSNQyO8Ruy6+SFybaaE=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2023-11-10T04:16:51.641Z",
+    "email": null,
+    "phone": "+79173966974",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": false,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": "9498",
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 56,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$7MrxHxJ5OW6QWEdw7p2PkN$ZhAZvglE6zx3t/iz7bXA3rOU+1rm/oCL3yFKW7dIMsU=",
+    "last_login": "2023-11-11T23:13:51.667Z",
+    "is_superuser": false,
+    "first_name": "Динар",
+    "last_name": "Мингазов",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-10T04:33:57.706Z",
+    "email": null,
+    "phone": "+79173966921",
+    "patronymic": null,
+    "avatar": "",
+    "country": "Россия",
+    "is_verified": true,
+    "subscription": true,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": "56",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 57,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$JpvxVHplu3d5CFgrMA0lC4$p0Foj9yPDOM0IobO/tO/d7wKlj2SUvliBN8G425XPmc=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-11T13:53:25.116Z",
+    "email": "test1@test.ru",
+    "phone": "1234567890",
+    "patronymic": null,
+    "avatar": "",
+    "country": "Kazan",
+    "is_verified": false,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 58,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$c3noaGTV4bSCNCso6PS4nc$2/5/7b9Q/YXMiVPhTPPgaaUAjqyKbumg9rBD3H1BjYs=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-11T13:53:25.852Z",
+    "email": "test2@test.ru",
+    "phone": "89176666666",
+    "patronymic": null,
+    "avatar": "",
+    "country": "USA",
+    "is_verified": false,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 60,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$4iLup7YSGesUSL1Bfdhf3r$cOm6p2Sa9zQPTopWzDzqMhXTDSbCCqLVwRtrLjeX/bc=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "Ilshat",
+    "last_name": "Molodov",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-11T13:55:56.855Z",
+    "email": "test1@test1.ru",
+    "phone": "1234567899",
+    "patronymic": null,
+    "avatar": "",
+    "country": "Kazan",
+    "is_verified": false,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 61,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$z2AmmoQcKJATBMwZECrLh6$I/TWzufBL4jFaNDqLbQhcR+F7OTq2b4ro7XGoCu+U+8=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "OLeg",
+    "last_name": "Tinkoff",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-11T13:55:57.593Z",
+    "email": "test2@test2.ru",
+    "phone": "89176666667",
+    "patronymic": null,
+    "avatar": "",
+    "country": "USA",
+    "is_verified": false,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 63,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$swsZHBlLPOG7YSETNKZI8W$ToJUDbNx69KNBEW2J2CHEpUPLrQ0jfJIAoHQ9RSThr0=",
+    "last_login": null,
+    "is_superuser": true,
+    "first_name": "Admin",
+    "last_name": "Dinn",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-11-11T13:56:44.001Z",
+    "email": "dinn.land@maifl.ru",
+    "phone": "+79171717171",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": false,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 64,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$IYvcpecv0R8S9m4Rlzws1N$rkY+4PS6VfHCBnz48xp+Mwic+3e07N3gfx78atw1kGw=",
+    "last_login": "2023-11-11T21:28:33.776Z",
+    "is_superuser": false,
+    "first_name": "der",
+    "last_name": "edr",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-11T21:28:15.110Z",
+    "email": "d.mingazow2013@yandex.ru",
+    "phone": "+79173966212",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": true,
+    "subscription": true,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": "57",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.payment",
+  "pk": 56,
+  "fields": {
+    "user": 56,
+    "date_of_payment": "2023-11-11T10:56:30.367Z",
+    "payment_amount": 22200,
+    "is_paid": true,
+    "session": "cs_test_a1Wgob3AnqclLjUZeHjJKWLbEfxTtfVBEuEF0rLnifM3AqVw6SaBe6VXuS"
+  }
+},
+{
+  "model": "users.payment",
+  "pk": 57,
+  "fields": {
+    "user": 64,
+    "date_of_payment": "2023-11-11T21:28:40.084Z",
+    "payment_amount": 12200,
+    "is_paid": true,
+    "session": "cs_test_a15LExzNUp9ECXq0nL2oZPEUFVLK39XBjM8eoDIumRv3SXZ7v5FriRCAyZ"
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 1,
+  "fields": {
+    "owner": 1,
+    "header": "хочу ноут",
+    "content": "наддооооооооо",
+    "slug": "hochu-nout",
+    "date_of_create": "2023-11-03T22:16:40.960Z",
+    "image": "publications/img/chart_3.png",
+    "video": "",
+    "sign_of_publication": true,
+    "quantity_of_views": 201,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 3,
+  "fields": {
+    "owner": 1,
+    "header": "Кость большого пальца",
+    "content": "В 2017 году в баварском городе Фрайзинге велись работы по ремонту трубопровода. Рядом со старинной церковью Святого Георгия, которая сейчас капитально реставрируется, рабочие неожиданно наткнулись на средневековую могилу. У найденного скелета отсутствовали пальцы левой руки, а на их месте располагался сильно проржавевший металлический предмет. Исследователи установили, что скелет принадлежал мужчине 30-50 лет. Датирование радиоуглеродным методом показало, что этот человек жил около 500 лет назад.\r\n\r\nРжавую конструкцию очистили, стабилизировали, после чего в 2021 году выполнили рентген. Выяснилось, что найденный предмет полый внутри, и видимо представлял собой протез из железа и цветных металлов, заменявший мужчине четыре пальца - указательный, средний, безымянный и мизинец. Копии пальцев были изготовлены из листового железа, расположены параллельно друг другу и слегка согнуты. Кость большого пальца располагалась внутри протеза. Реставраторы полагают, что протез был покрыт кожей и привязан ремнями к культе руки. Фрагменты смятого, похожего на марлю материала внутри пальцев - вероятно, то что осталось от ткани, покрывавшей культю.",
+    "slug": "kost-bolshogo-paltsa",
+    "date_of_create": "2023-11-03T22:17:10Z",
+    "image": "publications/img/501cf365c3d7d869219ac31c3d54fbd1.jpg",
+    "video": "publications/video/Для_важных_переговоров_I9O6MHx.mp4",
+    "sign_of_publication": true,
+    "quantity_of_views": 162,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 4,
+  "fields": {
+    "owner": 1,
+    "header": "Бернард",
+    "content": "Переключатели («галочки») и «кнопки радио»\r\nСтили классов .button могут применяться к прочим элементам, таким как <label>, для создания переключателей («галочек») или «кнопок радио». Добавьте data-toggle=\"buttons\" к классу .btn-group, содержащему эти измененные кнопки, для включения «переключателей» в их соответствующих стилях.\r\n\r\nСостояние выбора (т.е. когда ставится «галочка») обновляется лишь событием клика click по кнопке. Если вы используете другой метод для обновления ввода – например <input type=\"reset\"> или вручную применяя свойство ввода checked – вам потребуется вручную применить класс .active к <label>.",
+    "slug": "bernard",
+    "date_of_create": "2023-11-03T22:31:50.828Z",
+    "image": "publications/img/photo_2023-10-06_09-35-37.jpg",
+    "video": "publications/video/Для_важных_переговоров.mp4",
+    "sign_of_publication": true,
+    "quantity_of_views": 129,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 5,
+  "fields": {
+    "owner": 1,
+    "header": "Синяк",
+    "content": "Напомним, Михалков поскользнулся, упал и ударился головой. Обследование показало, что серьезных травм у него нет.\r\n\r\n\"Да, я упал, очень скользко было, когда выходили из машины. Нормально, как видите\", - рассказал Михалков журналистам, добавив, что ему \"просто сделали перевязку, заклеили, сделали МРТ\", \"чтобы не было гематом, потому что я сильно ударился головой\", - уточнил режиссер.\r\n\r\nНиките Михалкову 72 года. Советский, российский режиссер, актер, сценарист, продюсер, Народный артист РСФСР, полный кавалер ордена \"За заслуги перед Отечеством\".\r\n\r\nПредседатель Союза кинематографистов России - с 1998 года. Трижды лауреат Государственной премии Российской Федераци",
+    "slug": "sinyak",
+    "date_of_create": "2023-11-04T10:27:03.271Z",
+    "image": "publications/img/db30d86e-a849-4f6a-b375-3abf14a11817.jfif",
+    "video": "publications/video/Для_важных_переговоров_1.mp4",
+    "sign_of_publication": true,
+    "quantity_of_views": 15,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 6,
+  "fields": {
+    "owner": 1,
+    "header": "blog",
+    "content": "23 16:15:21] \"POST /set-new-password/Mg/set-password/ HTTP/1.1\" 302 0\r\n[04/Nov/2023 16:15:21] \"GET / HTTP/1.1\" 302 0\r\n[04/Nov/2023 16:15:21] \"GET /not_authenticated/?next=/ HTTP/1.1\" 200 2651\r\n[04/Nov/2023 16:15:24] \"GET /login/ HTTP/1.1\" 200 3525\r\n[04/Nov/2023 16:15:28] \"POST /login/ HTTP/1.1\" 200 3686\r\n[04/Nov/2023 16:16:47] \"GET /login/ HTTP/1.1\" 200 3525\r\n[04/Nov/2023 16:16:50] \"POST /login/ HTTP/1.1\" 200 3686",
+    "slug": "blog",
+    "date_of_create": "2023-11-04T15:18:03.772Z",
+    "image": "",
+    "video": "",
+    "sign_of_publication": true,
+    "quantity_of_views": 30,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 7,
+  "fields": {
+    "owner": 1,
+    "header": "content",
+    "content": "Деду подарили сертификат на отечественную тачку. Вот правда,хоть раз оценен адекватно поступок. Я за него порадовался",
+    "slug": "content",
+    "date_of_create": "2023-11-04T17:01:39.546Z",
+    "image": "",
+    "video": "publications/video/Для_важных_переговоров_1_HlqakEB.mp4",
+    "sign_of_publication": true,
+    "quantity_of_views": 9,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 8,
+  "fields": {
+    "owner": 2,
+    "header": "Второйюзер",
+    "content": "Добавить новый пост\r\n                                </a>\r\n                            </div>\r\n                        {% endif %}\r\n                        <div class=\"row\">\r\n\r\n                            {% for publication in author_publication_all %}\r\n                                <div class=\"col-8 mt-4 mx-auto\">",
+    "slug": "vtorojyuzer",
+    "date_of_create": "2023-11-04T21:01:33.950Z",
+    "image": "publications/img/chart.png",
+    "video": "",
+    "sign_of_publication": true,
+    "quantity_of_views": 10,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 9,
+  "fields": {
+    "owner": 2,
+    "header": "every",
+    "content": "fgdfhfjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+    "slug": "every",
+    "date_of_create": "2023-11-04T21:19:12.645Z",
+    "image": "",
+    "video": "publications/video/Гомер__Тагил.mp4",
+    "sign_of_publication": true,
+    "quantity_of_views": 8,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 10,
+  "fields": {
+    "owner": 56,
+    "header": "Функционал для генерации кода",
+    "content": "В 2013 году Всемирный банк при поддержке Сети знаний о климате и развитии, опубликовал доклад, в котором было установлено, что изменение климата, вероятно, будет препятствовать усилиям мировой общественности по сокращению уровня бедности. В отчёте представлены вероятные последствия повышения температуры на 2° C и 4° C для сельскохозяйственного производства, состояния водных ресурсов, прибрежных экосистем и благополучия городов в странах Африки к югу от Сахары, Южной Азии и Юго-Восточной Азии. Последствия повышения температуры на 2 ° C таковы: регулярная нехватка продовольствия в странах Африки к югу от Сахары; изменение характера выпадения осадков в Южной Азии, когда некоторые её части затопляются, а другие остаются без достаточного количества воды для выработки электроэнергии, орошения или питья; деградация и утрата рифов в Юго-Восточной Азии, что приведёт к сокращению рыбных запасов",
+    "slug": "funktsional-dlya-generatsii-koda",
+    "date_of_create": "2023-11-07T12:32:44.701Z",
+    "image": "publications/img/bbfa55725aa5d5e77bbd45d771ab36d3.jpg",
+    "video": "",
+    "sign_of_publication": true,
+    "quantity_of_views": 44,
+    "is_paid": true
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 11,
+  "fields": {
+    "owner": 56,
+    "header": "dfgdfg",
+    "content": "dfgdfg",
+    "slug": "dfgdfg",
+    "date_of_create": "2023-11-11T11:05:14.512Z",
+    "image": "",
+    "video": "",
+    "sign_of_publication": true,
+    "quantity_of_views": 4,
+    "is_paid": true
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 12,
+  "fields": {
+    "owner": 64,
+    "header": "1",
+    "content": "1",
+    "slug": "1",
+    "date_of_create": "2023-11-11T17:21:57.883Z",
+    "image": "",
+    "video": "",
+    "sign_of_publication": true,
+    "quantity_of_views": 3,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 15,
+  "fields": {
+    "owner": 64,
+    "header": "Хотите ли вы жить красиво?",
+    "content": "Как бы вы ответили на вопрос «Хотите ли вы жить красиво?»\r\n\r\nЕсть предположение, что ответ был бы «Да, конечно!» И я уверена, что вместе с вами, точно также ответило бы большинство людей.\r\n\r\nНо, когда оглядываешься вокруг, возникает вопрос: почему же многие люди не могут сказать, что они живут красиво? Неужели им кто-то это запретил? Ведь есть же расхожее мнение, что это запретить невозможно.\r\n\r\nЗанимательная картинка получается:\r\n\r\nЖить красиво хотят, если и не все, то почти все.\r\nЖить красиво нам никто не запрещает.\r\nНо очень немногие могут с уверенностью сказать, что они живут красиво.\r\nВ чем же загвоздка, и можно ли исправить ситуацию?\r\n\r\nЧасто мы думаем, что у нас не хватает ресурсов, чтобы жить красиво. Наиболее распространённые из объяснений — это нехватка денег и времени. Многие сетуют, что живут не там, не в то время и не в том окружении, либо, что совсем нет сил и здоровья на красивую жизнь.",
+    "slug": "hotite-li-vyi-zhit-krasivo",
+    "date_of_create": "2023-11-11T22:31:07.164Z",
+    "image": "publications/img/theme_29.jpg",
+    "video": "",
+    "sign_of_publication": true,
+    "quantity_of_views": 3,
+    "is_paid": true
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 16,
+  "fields": {
+    "owner": 1,
+    "header": "Бедная жизнь настигла меня",
+    "content": "характеристика экономического положения индивида или социальной группы, при котором они не могут удовлетворить определённый круг минимальных потребностей, необходимых для жизни, сохранения трудоспособности, продолжения рода.\r\n\r\nБедность является относительным и многозначным понятием и зависит от общего стандарта уровня жизни в данном обществе (коэффициент Джини, индекс Тейла).[1]\r\n\r\nУчёные оперируют понятиями абсолютной (первичной) и относительной (вторичной) бедности. Абсолютная бедность определяется как состояние человека, в котором у него недостаточны условия для физиологического выживания. Относительная - как состояние человека, при котором имеющиеся у человека средства недостаточны, чтобы соответствовать субъективным общественным ожиданиям относительно нормы[2][3].",
+    "slug": "bednaya-zhizn-nastigla-menya",
+    "date_of_create": "2023-11-11T23:05:17.980Z",
+    "image": "",
+    "video": "",
+    "sign_of_publication": true,
+    "quantity_of_views": 0,
+    "is_paid": false
+  }
+}
+]
