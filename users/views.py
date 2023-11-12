@@ -153,7 +153,7 @@ class UserForgotPasswordEmailView(SuccessMessageMixin, PasswordResetView):
     """Представление по сбросу пароля по почте"""
     form_class = UserForgotPasswordForm
     template_name = 'users/user_password_reset.html'
-    success_url = reverse_lazy('users:done_generate_new_password/')
+    success_url = reverse_lazy('users:done_generate_new_password')
     success_message = 'Письмо с инструкцией по восстановлению пароля отправлена на ваш email'
     subject_template_name = 'users/email/password_subject_reset_mail.txt'
     email_template_name = 'users/email/password_reset_mail.html'
@@ -466,8 +466,6 @@ class PaymentRetrieveView(LoginRequiredMixin, ListView):
         stripe_url = session["url"]
         content = {'stripe_url': stripe_url}
         return render(request, 'users/payment_url.html', content)
-
-
 
     def get_object(self, queryset=None):
         return self.request.user

@@ -31,6 +31,7 @@ class PublicationTestCase(TestCase):
         self.user2 = User.objects.create(
             email='test@user2.ru',
             phone='+79170000000',
+            subscription=True,
         )
         self.user.set_password('11111111')
         self.user.save()
@@ -48,29 +49,64 @@ class PublicationTestCase(TestCase):
             'content': 'content2',
             'is_paid': True
         }
-        self.wrongdata = {
-            'owner': self.user,
+        self.data3 = {
+            'owner': self.user2.pk,
             'header': 'second',
             'content': 'content2',
-            'is_paid': '3'
+            'is_paid': False
         }
         self.data2 = {
             'owner': "self.user",
             'header': 'second',
             'content': 'content2',
-            'is_paid': "True"
+            'is_paid': True
         }
-    def test_get_list(self):
-        """Тест вывода Публикаций"""
+    def test_get_list_no_sub(self):
+        """Тест вывода Публикаций без подписки"""
         self.client.force_login(user=self.user)
+        response = self.client.get(path='/publications/')
+        self.assertEqual(response.status_code, 302)
+
+    def test_get_list_sub(self):
+        """Тест вывода Публикаций без подписки"""
+        self.client.force_login(user=self.user2)
         response = self.client.get(path='/publications/')
         self.assertEqual(response.status_code, 200)
 
+    def test_get_list_sub_paid_posts(self):
+        """Тест вывода Публикаций без подписки"""
+        self.client.force_login(user=self.user2)
+        response = self.client.get(path='/paid_publications/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_list_no_sub_paid_posts(self):
+        """Тест вывода Публикаций без подписки"""
+        self.client.force_login(user=self.user)
+        response = self.client.get(path='/paid_publications/')
+        self.assertEqual(response.status_code, 302)
+
+    def test_get_list_sub_free_posts(self):
+        """Тест вывода Публикаций без подписки"""
+        self.client.force_login(user=self.user2)
+        response = self.client.get(path='/free_publications/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_list_no_sub_free_posts(self):
+        """Тест вывода Публикаций без подписки"""
+        self.client.force_login(user=self.user)
+        response = self.client.get(path='/free_publications/')
+        self.assertEqual(response.status_code, 200)
+
     def test_post(self):
-        """Тест, где все ОК"""
-        # self.client.force_authenticate(user=self.user)
+        """Тест"""
         self.client.force_login(user=self.user)
         response = self.client.post('/create-publication/', data=self.data)
+        self.assertEqual(response.status_code, 302)
+
+    def test_post(self):
+        """Тест"""
+        self.client.force_login(user=self.user2)
+        response = self.client.post('/create-publication/', data=self.data3)
         self.assertEqual(response.status_code, 302)
 
     def test_user_can_get(self):
@@ -95,7 +131,16 @@ class PublicationTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_post_e(self):
-        # self.client.force_authenticate(user=self.user)
         self.client.force_login(user=self.user)
         response = self.client.get('/email-confirmed/')
         self.assertEqual(response.status_code, 200)
+
+    def test_post_del_nosub(self):
+        self.client.force_login(user=self.user)
+        response = self.client.get('/delete-publication/2/')
+        self.assertEqual(response.status_code, 404)
+
+    def test_post_del_sub(self):
+        self.client.force_login(user=self.user2)
+        response = self.client.get('/delete-publication/2/')
+        self.assertEqual(response.status_code, 404)

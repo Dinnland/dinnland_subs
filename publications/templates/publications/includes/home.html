@@ -5,25 +5,17 @@
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">{{ title }}</h1>
-        <p class="lead"> Смотри уникальный контент
-            <a class="btn btn-primary" href="{% url 'publications:publication_list' %}">Публикации</a>
+        <p class="lead"> Смотри уникальный контент</p>
+            <a class="btn btn-primary" href="{% url 'publications:publication_list' %}">Все посты</a>
+            <a class="btn btn-primary" href="{% url 'publications:paid_publication_list' %}">Посты по подписке</a>
+            <a class="btn btn-primary" href="{% url 'publications:free_publication_list' %}">Бесплатные посты</a>
+
     </div>
     <div class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6 offset-md-3">
-                            <div class="col-md-4"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="py-5">
             <div class="container">
                 <div class="row">
-                    <p>Публикации:</p>
+                    <p>Самое свежее из постов:</p>
                     <div class="row">
                         {% for publication in publication_list %}
                             <div class="col-4 mt-4">
