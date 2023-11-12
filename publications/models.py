@@ -18,7 +18,6 @@ class Publication(models.Model):
     content = models.TextField(verbose_name='Содержимое')
     slug = models.CharField(max_length=150, verbose_name=' Человекопонятный URL', **NULLABLE)
     date_of_create = models.DateTimeField(verbose_name='Дата создания', default=timezone.now)
-
     image = models.ImageField(upload_to='publications/img/', verbose_name='Изображение', **NULLABLE)
     video = models.FileField(upload_to='publications/video/', verbose_name='Видео', **NULLABLE,
                              validators=[

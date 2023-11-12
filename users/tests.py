@@ -101,7 +101,7 @@ class UsersTestCase(TestCase):
         """Тест, нельзя поменять номер, который есть в бд"""
         self.client.force_login(user=self.user)
         response = self.client.post(path=f'/profile/', data=self.data_us_mail_rep)
-        self.assertNotEquals(str(self.user.phone), second=self.data_us_mail_rep['phone'] )
+        self.assertNotEquals(str(self.user.phone), second=self.data_us_mail_rep['phone'])
 
     def test_post_access(self):
         """Тест, Новый пароль по access коду"""

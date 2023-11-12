@@ -27,7 +27,7 @@
     "image": "publications/img/501cf365c3d7d869219ac31c3d54fbd1.jpg",
     "video": "publications/video/Для_важных_переговоров_I9O6MHx.mp4",
     "sign_of_publication": true,
-    "quantity_of_views": 162,
+    "quantity_of_views": 163,
     "is_paid": false
   }
 },
@@ -148,14 +148,14 @@
   "pk": 11,
   "fields": {
     "owner": 56,
-    "header": "dfgdfg",
-    "content": "dfgdfg",
-    "slug": "dfgdfg",
+    "header": "Как выбрать игровой ноутбук",
+    "content": "Большинство игр зависят от видеокарты. Поэтому выбор видеокарты – самое важное решение при покупке игрового ноутбука. На данный момент большинство моделей поставляются с видеокартами NVIDIA GeForce GTX или RTX.\r\n\r\nПоследние мобильные видеокарты NVIDIA – серии RTX 40: от RTX 4050 до RTX 4090. У AMD есть серия Radeon 7000M, в которую входит RX 7600 и RX7700.\r\n\r\nДля игр начального уровня вы можете выбрать GeForce RTX 4050. Она даст вам возможность играть в разрешении Full HD на средних/высоких настройках в топовые ААА-игры, либо на ультра в киберспортивные игры, такие как CS:GO, Overwatch, Fortnite, Apex Legends. Ее производительности недостаточно для трассировки лучей, но вы сможете использовать технологию DLSS и получить прирост мощности.\r\n\r\nДля игры на высоких и ультра настройках в разрешении Full HD потребуется видеокарта RTX 4060 и выше. Она на 20-25% производительнее, чем RTX 4050. Следующей идет RTX 4070 – она на 10-20% мощнее, чем RTX 4060. Вы сможете уверенно играть во все игры на ультра настройках в Full HD и на средне-высоких в разрешении 2560×1440 (2К).\r\n\r\nДля игры в разрешениях 2K и 4K есть видеокарты RTX 4080 и 4090 (на 10-20% мощнее). С ними вы сможете играть на ультра настройках как в разрешении 2К, так и в 3840х2160 (4К).",
+    "slug": "kak-vyibrat-igrovoj-noutbuk",
     "date_of_create": "2023-11-11T11:05:14.512Z",
-    "image": "",
+    "image": "publications/img/hpc-in-stock-banner-banner-dark-gray.jpg",
     "video": "",
     "sign_of_publication": true,
-    "quantity_of_views": 4,
+    "quantity_of_views": 6,
     "is_paid": true
   }
 },
@@ -171,7 +171,7 @@
     "image": "",
     "video": "",
     "sign_of_publication": true,
-    "quantity_of_views": 3,
+    "quantity_of_views": 4,
     "is_paid": false
   }
 },
@@ -187,7 +187,7 @@
     "image": "publications/img/theme_29.jpg",
     "video": "",
     "sign_of_publication": true,
-    "quantity_of_views": 3,
+    "quantity_of_views": 4,
     "is_paid": true
   }
 },
@@ -203,7 +203,39 @@
     "image": "",
     "video": "",
     "sign_of_publication": true,
+    "quantity_of_views": 3,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 17,
+  "fields": {
+    "owner": 56,
+    "header": "Не понимаю смысла жизни",
+    "content": "Легко и просто записывайте все действия на экране ПК и сохраняйте в HD качестве.\r\n\r\nЗаписывайте высокопроизводительные игры или видео 4K UHD без задержек.\r\n\r\nЗаписывайте онлайн-встречи, курсы или любой видео контент в один клик мыши.\r\n\r\nРедактируйте и настраивайте записанные видео с помощью встроенного редактора.",
+    "slug": "ne-ponimayu-smyisla-zhizni",
+    "date_of_create": "2023-11-12T00:44:59.089Z",
+    "image": "publications/img/ss.PNG",
+    "video": "",
+    "sign_of_publication": true,
     "quantity_of_views": 0,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 18,
+  "fields": {
+    "owner": 66,
+    "header": "DINNLAND_SUSB",
+    "content": "ONLY FOR YOU",
+    "slug": "dinnlandsusb",
+    "date_of_create": "2023-11-12T04:04:20.979Z",
+    "image": "publications/img/Снимок.PNG",
+    "video": "",
+    "sign_of_publication": true,
+    "quantity_of_views": 2,
     "is_paid": false
   }
 }
