@@ -457,18 +457,18 @@
 },
 {
   "model": "sessions.session",
-  "pk": "kl7zx18hlfbkrft583wd6o095iynuhwh",
+  "pk": "be4c923q2es21jmrs6m9dhvbus90osu3",
   "fields": {
-    "session_data": ".eJxVjMsOwiAQRf-FtSG8OqBL934DGWZAqoYmpV0Z_92QdKHbe865bxFx32rce17jzOIitDj9bgnpmdsA_MB2XyQtbVvnJIciD9rlbeH8uh7u30HFXkdtyTqjVQHjNE1mImWBkKgwQ0CfbTCAKig2ELw2XmPIoFxh0CWdk_h8AdJFN5A:1qzFiT:7QQ0b22FkiKvaJaREw3QECQHVtkC5ANv3EfzM7ibEZs",
-    "expire_date": "2023-11-18T12:25:29.571Z"
+    "session_data": ".eJxVjEsOwjAMBe-SNYraNHEcluw5Q2XHDimgVupnhbg7VOoCtm9m3sv0tK213xad-0HM2QCY0-_IlB867kTuNN4mm6dxnQe2u2IPutjrJPq8HO7fQaWlfuvkkVOb0bvONeS6ToNnIYjJAcUoqJyhjSECYxGgRkQLRgmo6AoW8_4A9pQ4MQ:1r1zJs:APdS5i1Ya7QnoJvUf-5M9fqCRmEZSgdgg21myKAFg7M",
+    "expire_date": "2023-11-26T01:31:24.891Z"
   }
 },
 {
   "model": "sessions.session",
-  "pk": "t7tir4gczt97zkdonqi5hrfxtmrqlm2e",
+  "pk": "kl7zx18hlfbkrft583wd6o095iynuhwh",
   "fields": {
-    "session_data": ".eJxVjMsOwiAQRf-FtSGAAwMu3fsNZHhJ1UBS2pXx322TLnR7zrn3zTytS_XryLOfErswbdjpFwaKz9x2kx7U7p3H3pZ5CnxP-GEHv_WUX9ej_TuoNOq2dqEUQohSatQWlYKiLDkowkQNG0kyBivwLAsSklBogwEVNLkkwQj2-QLzRzcj:1r1xAl:AkzNwoEmtxU4W7jT0tGcpO5gPk3BArat4M0RZvfNjXM",
-    "expire_date": "2023-11-25T23:13:51.670Z"
+    "session_data": ".eJxVjMsOwiAQRf-FtSG8OqBL934DGWZAqoYmpV0Z_92QdKHbe865bxFx32rce17jzOIitDj9bgnpmdsA_MB2XyQtbVvnJIciD9rlbeH8uh7u30HFXkdtyTqjVQHjNE1mImWBkKgwQ0CfbTCAKig2ELw2XmPIoFxh0CWdk_h8AdJFN5A:1qzFiT:7QQ0b22FkiKvaJaREw3QECQHVtkC5ANv3EfzM7ibEZs",
+    "expire_date": "2023-11-18T12:25:29.571Z"
   }
 },
 {
@@ -665,7 +665,7 @@
     "is_staff": false,
     "is_active": false,
     "date_joined": "2023-11-09T22:52:30.619Z",
-    "email": "dinn.land@mail.ru",
+    "email": "dinnw.land@mail.ru",
     "phone": "+79173966966",
     "patronymic": null,
     "avatar": "",
@@ -914,6 +914,58 @@
   }
 },
 {
+  "model": "users.user",
+  "pk": 65,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$tK7ZcP6XIqoRjpkMisSDyH$0KTd/Kb/UWpUJNPVXadT/A3kekXPap9CQqlgqEfAZco=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "Шамиль",
+    "last_name": "Мавроди",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-12T01:04:22.699Z",
+    "email": "dinun.land@mail.ru",
+    "phone": "+79177777777",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": true,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 66,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$3jLBJAoX1sayXBEfCNeyUn$vTQdYPnEaizWv21H8fBddGdTPh+qnOR0jmv6FUAnrmQ=",
+    "last_login": "2023-11-12T01:31:24.889Z",
+    "is_superuser": false,
+    "first_name": "german",
+    "last_name": "danilov",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-12T01:29:21.903Z",
+    "email": "dinn.land@mail.ru",
+    "phone": "+79173966928",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": true,
+    "subscription": true,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": "58",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
   "model": "users.payment",
   "pk": 56,
   "fields": {
@@ -933,6 +985,17 @@
     "payment_amount": 12200,
     "is_paid": true,
     "session": "cs_test_a15LExzNUp9ECXq0nL2oZPEUFVLK39XBjM8eoDIumRv3SXZ7v5FriRCAyZ"
+  }
+},
+{
+  "model": "users.payment",
+  "pk": 58,
+  "fields": {
+    "user": 66,
+    "date_of_payment": "2023-11-12T01:32:06.892Z",
+    "payment_amount": 50000,
+    "is_paid": true,
+    "session": "cs_test_a1Q6qIIqQXQ7hPm0W3hBsEP4DrACwxGaL6GbQjzudhyEyF1MX0w5tju5Z4"
   }
 },
 {
@@ -963,7 +1026,7 @@
     "image": "publications/img/501cf365c3d7d869219ac31c3d54fbd1.jpg",
     "video": "publications/video/Для_важных_переговоров_I9O6MHx.mp4",
     "sign_of_publication": true,
-    "quantity_of_views": 162,
+    "quantity_of_views": 163,
     "is_paid": false
   }
 },
@@ -1084,14 +1147,14 @@
   "pk": 11,
   "fields": {
     "owner": 56,
-    "header": "dfgdfg",
-    "content": "dfgdfg",
-    "slug": "dfgdfg",
+    "header": "Как выбрать игровой ноутбук",
+    "content": "Большинство игр зависят от видеокарты. Поэтому выбор видеокарты – самое важное решение при покупке игрового ноутбука. На данный момент большинство моделей поставляются с видеокартами NVIDIA GeForce GTX или RTX.\r\n\r\nПоследние мобильные видеокарты NVIDIA – серии RTX 40: от RTX 4050 до RTX 4090. У AMD есть серия Radeon 7000M, в которую входит RX 7600 и RX7700.\r\n\r\nДля игр начального уровня вы можете выбрать GeForce RTX 4050. Она даст вам возможность играть в разрешении Full HD на средних/высоких настройках в топовые ААА-игры, либо на ультра в киберспортивные игры, такие как CS:GO, Overwatch, Fortnite, Apex Legends. Ее производительности недостаточно для трассировки лучей, но вы сможете использовать технологию DLSS и получить прирост мощности.\r\n\r\nДля игры на высоких и ультра настройках в разрешении Full HD потребуется видеокарта RTX 4060 и выше. Она на 20-25% производительнее, чем RTX 4050. Следующей идет RTX 4070 – она на 10-20% мощнее, чем RTX 4060. Вы сможете уверенно играть во все игры на ультра настройках в Full HD и на средне-высоких в разрешении 2560×1440 (2К).\r\n\r\nДля игры в разрешениях 2K и 4K есть видеокарты RTX 4080 и 4090 (на 10-20% мощнее). С ними вы сможете играть на ультра настройках как в разрешении 2К, так и в 3840х2160 (4К).",
+    "slug": "kak-vyibrat-igrovoj-noutbuk",
     "date_of_create": "2023-11-11T11:05:14.512Z",
-    "image": "",
+    "image": "publications/img/hpc-in-stock-banner-banner-dark-gray.jpg",
     "video": "",
     "sign_of_publication": true,
-    "quantity_of_views": 4,
+    "quantity_of_views": 6,
     "is_paid": true
   }
 },
@@ -1107,7 +1170,7 @@
     "image": "",
     "video": "",
     "sign_of_publication": true,
-    "quantity_of_views": 3,
+    "quantity_of_views": 4,
     "is_paid": false
   }
 },
@@ -1123,7 +1186,7 @@
     "image": "publications/img/theme_29.jpg",
     "video": "",
     "sign_of_publication": true,
-    "quantity_of_views": 3,
+    "quantity_of_views": 4,
     "is_paid": true
   }
 },
@@ -1139,7 +1202,39 @@
     "image": "",
     "video": "",
     "sign_of_publication": true,
+    "quantity_of_views": 3,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 17,
+  "fields": {
+    "owner": 56,
+    "header": "Не понимаю смысла жизни",
+    "content": "Легко и просто записывайте все действия на экране ПК и сохраняйте в HD качестве.\r\n\r\nЗаписывайте высокопроизводительные игры или видео 4K UHD без задержек.\r\n\r\nЗаписывайте онлайн-встречи, курсы или любой видео контент в один клик мыши.\r\n\r\nРедактируйте и настраивайте записанные видео с помощью встроенного редактора.",
+    "slug": "ne-ponimayu-smyisla-zhizni",
+    "date_of_create": "2023-11-12T00:44:59.089Z",
+    "image": "publications/img/ss.PNG",
+    "video": "",
+    "sign_of_publication": true,
     "quantity_of_views": 0,
+    "is_paid": false
+  }
+},
+{
+  "model": "publications.publication",
+  "pk": 18,
+  "fields": {
+    "owner": 66,
+    "header": "DINNLAND_SUSB",
+    "content": "ONLY FOR YOU",
+    "slug": "dinnlandsusb",
+    "date_of_create": "2023-11-12T04:04:20.979Z",
+    "image": "publications/img/Снимок.PNG",
+    "video": "",
+    "sign_of_publication": true,
+    "quantity_of_views": 2,
     "is_paid": false
   }
 }

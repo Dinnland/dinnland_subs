@@ -163,7 +163,7 @@ class PublicationDetailView(LoginRequiredMixin, DetailView):
 
 
 class PublicationUpdateView(AuthorRequiredMixin, LoginRequiredMixin, UpdateView):
-    """Страница для Изменения блога"""
+    """Страница для Изменения публикации"""
     model = Publication
     form_class = PublicationForm
 
@@ -181,7 +181,7 @@ class PublicationUpdateView(AuthorRequiredMixin, LoginRequiredMixin, UpdateView)
 
 
 class PublicationDeleteView(AuthorRequiredMixin, LoginRequiredMixin, DeleteView):
-    """Страница для удаления блога"""
+    """Страница для удаления публикации"""
     model = Publication
     success_url = reverse_lazy('publications:publication_list')
 

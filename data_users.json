@@ -193,7 +193,7 @@
     "is_staff": false,
     "is_active": false,
     "date_joined": "2023-11-09T22:52:30.619Z",
-    "email": "dinn.land@mail.ru",
+    "email": "dinnw.land@mail.ru",
     "phone": "+79173966966",
     "patronymic": null,
     "avatar": "",
@@ -442,6 +442,58 @@
   }
 },
 {
+  "model": "users.user",
+  "pk": 65,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$tK7ZcP6XIqoRjpkMisSDyH$0KTd/Kb/UWpUJNPVXadT/A3kekXPap9CQqlgqEfAZco=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "Шамиль",
+    "last_name": "Мавроди",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-12T01:04:22.699Z",
+    "email": "dinun.land@mail.ru",
+    "phone": "+79177777777",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": true,
+    "subscription": false,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 66,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$3jLBJAoX1sayXBEfCNeyUn$vTQdYPnEaizWv21H8fBddGdTPh+qnOR0jmv6FUAnrmQ=",
+    "last_login": "2023-11-12T01:31:24.889Z",
+    "is_superuser": false,
+    "first_name": "german",
+    "last_name": "danilov",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-11-12T01:29:21.903Z",
+    "email": "dinn.land@mail.ru",
+    "phone": "+79173966928",
+    "patronymic": null,
+    "avatar": "",
+    "country": null,
+    "is_verified": true,
+    "subscription": true,
+    "date_of_subscription": null,
+    "access_code": null,
+    "payment_pk": "58",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
   "model": "users.payment",
   "pk": 56,
   "fields": {
@@ -461,6 +513,17 @@
     "payment_amount": 12200,
     "is_paid": true,
     "session": "cs_test_a15LExzNUp9ECXq0nL2oZPEUFVLK39XBjM8eoDIumRv3SXZ7v5FriRCAyZ"
+  }
+},
+{
+  "model": "users.payment",
+  "pk": 58,
+  "fields": {
+    "user": 66,
+    "date_of_payment": "2023-11-12T01:32:06.892Z",
+    "payment_amount": 50000,
+    "is_paid": true,
+    "session": "cs_test_a1Q6qIIqQXQ7hPm0W3hBsEP4DrACwxGaL6GbQjzudhyEyF1MX0w5tju5Z4"
   }
 }
 ]

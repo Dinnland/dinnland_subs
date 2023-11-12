@@ -16,17 +16,6 @@ class AuthorRequiredMixin(AccessMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class UserIsNotAuthenticated(UserPassesTestMixin):
-    def test_func(self):
-        if self.request.user.is_authenticated:
-            messages.info(self.request, 'Вы уже авторизованы. Вы не можете посетить эту страницу.')
-            raise PermissionDenied
-        return True
-
-    def handle_no_permission(self):
-        return redirect('puplications:home')
-
-
 class OnlyFunsMixin(AccessMixin):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -36,3 +25,14 @@ class OnlyFunsMixin(AccessMixin):
             messages.info(request, 'Доступно только по подписке')
             return redirect('users:payment-create')
         return super().dispatch(request, *args, **kwargs)
+
+
+class UserIsNotAuthenticated(UserPassesTestMixin):
+    def test_func(self):
+        if self.request.user.is_authenticated:
+            messages.info(self.request, 'Вы уже авторизованы. Вы не можете посетить эту страницу.')
+            raise PermissionDenied
+        return True
+
+    def handle_no_permission(self):
+        return redirect('puplications:home')

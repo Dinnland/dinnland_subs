@@ -9,8 +9,6 @@ from django.utils.timezone import now
 
 NULLABLE = {'null': True, 'blank': True}
 
-# Create your models here.
-
 
 class User(AbstractUser):
     """Пользователь сервиса"""
@@ -18,7 +16,6 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, verbose_name='Email', blank=True, default=None)
     phone = PhoneNumberField(unique=True, verbose_name='Номер телефона')
     patronymic = models.CharField(max_length=25, verbose_name='Отчество', **NULLABLE)
-
     avatar = models.ImageField(upload_to='users/', verbose_name='Аватар - фото пользователя', **NULLABLE)
     country = models.CharField(max_length=30, verbose_name='Страна', **NULLABLE)
     is_verified = models.BooleanField(default=False, verbose_name='Верификация')

@@ -150,7 +150,7 @@ class DoneGenerateNewPassword(TemplateView):
 
 
 class UserForgotPasswordEmailView(SuccessMessageMixin, PasswordResetView):
-    """Представление по сбросу пароля по почте"""
+    """Вводим почту, туда идет ссылка на замену пароля"""
     form_class = UserForgotPasswordForm
     template_name = 'users/user_password_reset.html'
     success_url = reverse_lazy('users:done_generate_new_password')
@@ -233,7 +233,7 @@ class PhoneRegisterView(CreateView):
         user.is_active = False
         user.save()
         # Функционал для генерации кода и его отправки
-        generate_access_code(self, db_user=user, message='Your code:')
+        # generate_access_code(self, db_user=user, message='Your code:')
         return redirect('users:access-code')
 
     def get_object(self, queryset=None):
